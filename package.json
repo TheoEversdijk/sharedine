@@ -1,0 +1,27 @@
+{
+  "name": "sharedine",
+  "version": "1.0.0",
+  "description": "App for students to plan eating meals together",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheoEversdijk/sharedine.git"
+  },
+  "keywords": [
+    "App",
+    "Student",
+    "Eating"
+  ],
+  "author": "Kevin en de Rest",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheoEversdijk/sharedine/issues"
+  },
+  "homepage": "https://github.com/TheoEversdijk/sharedine#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
