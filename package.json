@@ -4,7 +4,8 @@
   "description": "App for students to plan eating meals together",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "jest",
+    "testCoverage": "jest --coverage"
   },
   "repository": {
     "type": "git",
