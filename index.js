@@ -1,11 +1,9 @@
-const express = require('express')
-const app = express()
-const port = 3000
+/**
+ * @format
+ */
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+import {AppRegistry} from 'react-native';
+import App from './App';
+import {name as appName} from './app.json';
 
-app.listen(port, () => {
-  console.log(`ShareDine listening on port ${port}`)
-})
+AppRegistry.registerComponent(appName, () => App);
