@@ -1,0 +1,6 @@
+.background {
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('../resources/images/Curry.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}

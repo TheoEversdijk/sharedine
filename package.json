@@ -1,4 +1,22 @@
 {
+  "name": "sharedine",
+  "version": "1.0.0",
+  "description": "Sharedine App",
+  "main": "index.html",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheoEversdijk/sharedine.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheoEversdijk/sharedine/issues"
+  },
   "dependencies": {
     "bootstrap": "^5.2.3"
   }
