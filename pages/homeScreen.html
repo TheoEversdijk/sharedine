@@ -13,7 +13,6 @@
 
 <body onload="getAppointments()">
 
-
     <div class="container">
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -61,6 +60,7 @@
           <li class="nav-item">
             <a class="nav-link d-flex flex-column text-center" aria-current="page" href="#"><i class="fas fa-bell fa-lg"></i><span class="small">Notifications</span></a>
           </li>
+          <button class="btn btn-primary" onclick="logout()">Logout</button>
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle d-flex align-items-center"
@@ -94,10 +94,20 @@
   <!-- Navbar -->
 
   <div class="container">
-    <div class="home-header">
+    <div class="home-header d-flex">
+      <div class="me-auto p-2">
         <h1> Welcome (User) </h1>
-        <hr>
+      </div>
+        <div class="p-2">
+          <button type="button" class="btn btn-dark">add</button>
+        </div>
+        <div class="p-2">
+          <button type="button" class="btn btn-dark">delete</button>
+        </div>
     </div>
+
+    <hr>
+
     <div class="item-list" id="items">
 
         <!-- <div class="card mb-3">
@@ -106,48 +116,7 @@
               <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
               <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
             </div>
-          </div>
-          
-        <div class="card mb-3">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-          </div>
-          
-        <div class="card mb-3">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-          </div>
-          
-        <div class="card mb-3">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-          </div>
-
-          
-        <div class="card mb-3">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-          </div>
-          
-        <div class="card mb-3">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-        </div> -->
+          </div> -->
     </div>
   </div>
 
