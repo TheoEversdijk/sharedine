@@ -17,19 +17,12 @@ async function login() {
     let data = await response.json();
     let accounts = [];
     accounts= data.data;
-    if (response) {
-        console.log(data)
-    }
     accounts.forEach(account => {
         if (account.email === email && account.password === password){
             sessionStorage.setItem('currentID', account.id);
             window.location = '/pages/homeScreen.html';
         }
     });
-    if (data.data.includes(email, password)){
-        console.log(data.data.includes(email, password))
-    }
-
 }
 
 async function getAppointments() {
@@ -37,8 +30,6 @@ async function getAppointments() {
 
     //store data in json
     let data = await response.json();
-    console.log(data)
-    console.log(sessionStorage.currentID)
     const body = document.getElementById('items')
     if (response) {
         data.forEach(data => {
@@ -55,7 +46,6 @@ async function getAppointments() {
                 body.append(listItem);
             }
         });
-        console.log(data)
     }
 
 }
