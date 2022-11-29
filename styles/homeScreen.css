@@ -35,3 +35,23 @@
 .home-header {
     padding-top: 15em;
 }
+
+.nav-color {
+  background: #00cfde; 
+}
+
+.no-decoration {
+  text-decoration: none;
+  color: black;
+}
+
+.no-decoration:visited {
+  text-decoration: none;
+  color: black;
+}
+
+.no-decoration:hover{
+  text-decoration: none;
+  color: rgb(21, 202, 226);
+  transition: 400ms;
+}

@@ -9,27 +9,26 @@ async function register() {
         method: 'POST'
     });
 
-    window.location = '../../index.html';
+      window.location = '../../index.html';
     
-    return response
+      return response
 }
 
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(() => {
-    'use strict'
+// // Example starter JavaScript for disabling form submissions if there are invalid fields
+// function validation() {
   
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll('.has-validation')
+//     // Fetch all the forms we want to apply custom Bootstrap validation styles to
+//     const forms = document.querySelectorAll('.has-validation')
   
-    // Loop over them and prevent submission
-    Array.from(forms).forEach(form => {
-      form.addEventListener('submit', event => {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
+//     // Loop over them and prevent submission
+//     Array.from(forms).forEach(form => {
+//       form.addEventListener('submit', event => {
+//         if (!form.checkValidity()) {
+//           event.preventDefault()
+//           event.stopPropagation()
+//         }
   
-        form.classList.add('was-validated')
-      }, false)
-    })
-  })()
+//         form.classList.add('was-validated')
+//       }, false)
+//     })
+//   };
