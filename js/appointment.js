@@ -5,13 +5,14 @@ async function getAppointments() {
 
     //store data in json
     let data = await response.json();
+    console.log(data);
     const body = document.getElementById('items')
     if (response) {
         data.forEach(data => {
             if (sessionStorage.currentID == data.owner_id){
                 let listItem = document.createElement('div');
                 listItem.innerHTML = 
-                `<a href="/pages/appointmentDetails.html" class="no-decoration">
+                `<a href="/pages/appointmentDetails.html" onclick="StoreID(${data.id})" class="no-decoration">
                         <div class="card mb-3">
                             <div class="card-body">
                                 <h5 class="card-title">${data.name}</h5>
@@ -26,7 +27,37 @@ async function getAppointments() {
             }
         });
     }
+}
 
+async function getAppointment() {
+    const response = await fetch(appointmentAPI);
+    //store data in json
+    let data = await response.json();
+    const body = document.getElementById('information')
+    if (response) {
+        data.forEach(data => {
+            if (sessionStorage.appointmentID == data.id){
+                let listItem = document.createElement('div');
+                listItem.innerHTML = 
+                `<a href="/pages/appointmentDetails.html" class="no-decoration">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">${data.name}</h5>
+                                <p class="card-text">Date: ${data.date}</p>
+                                <p class="card-text">Location: ${data.location}</p>
+                                <p class="card-text">Price: ${data.price}</p>
+                                <p class="card-text"><small class="text-muted">Time: ${data.time}</small></p>
+                            </div>
+                        </div>
+                    </a>`;
+                body.append(listItem);
+            }
+        });
+    }
+}
+
+function StoreID(id) {
+    sessionStorage.setItem("appointmentID", id);
 }
 
 async function addAppointment() {
