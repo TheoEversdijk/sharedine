@@ -1,6 +1,6 @@
 const appointmentAPI = "http://127.0.0.1:3002/appointments";
 
-async function getAppointments() {
+async function getPersonalAppointments() {
     const response = await fetch(appointmentAPI);
 
     //store data in json
@@ -16,10 +16,10 @@ async function getAppointments() {
                         <div class="card mb-3">
                             <div class="card-body">
                                 <h5 class="card-title">${data.name}</h5>
-                                <p class="card-text">Date: ${data.date}</p>
-                                <p class="card-text">Location: ${data.location}</p>
-                                <p class="card-text">Price: ${data.price}</p>
-                                <p class="card-text"><small class="text-muted">Time: ${data.time}</small></p>
+                                    <p class="card-text">Date: ${data.date}</p>
+                                    <p class="card-text">Location: ${data.location}</p>
+                                    <p class="card-text">Price: ${data.price}</p>
+                                    <p class="card-text"><small class="text-muted">Time: ${data.time}</small></p>
                             </div>
                         </div>
                     </a>`
