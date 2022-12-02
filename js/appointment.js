@@ -18,13 +18,40 @@ async function getPersonalAppointments() {
                                 <h5 class="card-title">${data.name}</h5>
                                     <p class="card-text">Date: ${data.date}</p>
                                     <p class="card-text">Location: ${data.location}</p>
-                                    <p class="card-text">Price: ${data.price}</p>
+                                    <p class="card-text">Price per portion: €${data.price}</p>
                                     <p class="card-text"><small class="text-muted">Time: ${data.time}</small></p>
                             </div>
                         </div>
                     </a>`
                 body.append(listItem);
             }
+        });
+    }
+}
+
+async function getAllAppointments() {
+    const response = await fetch(appointmentAPI);
+
+    //store data in json
+    let data = await response.json();
+    console.log(data);
+    const body = document.getElementById('items')
+    if (response) {
+        data.forEach(data => {
+                let listItem = document.createElement('div');
+                listItem.innerHTML = 
+                `<a href="/pages/appointmentDetails.html" onclick="StoreID(${data.id})" class="no-decoration">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">${data.name}</h5>
+                                    <p class="card-text">Date: ${data.date}</p>
+                                    <p class="card-text">Location: ${data.location}</p>
+                                    <p class="card-text">Price per portion: €${data.price}</p>
+                                    <p class="card-text"><small class="text-muted">Time: ${data.time}</small></p>
+                            </div>
+                        </div>
+                    </a>`
+                body.append(listItem);
         });
     }
 }

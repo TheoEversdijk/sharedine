@@ -11,7 +11,7 @@
     <title>ShareDine</title>
 </head>
 
-<body onload="{getAppointments(); checkLoggedIn(); account()}">
+<body onload="{getAllAppointments(); checkLoggedIn(); account()}">
 
     <div class="container">
       <!-- Navbar -->
@@ -89,7 +89,10 @@
     <div>
         <h1>Appointments</h1>
     </div>
-    <div class="item-list" id="items"></div>
+
+    <hr> 
+
+    <div class="item-list py-3" id="items"></div>
   </div>
 </div>
 
