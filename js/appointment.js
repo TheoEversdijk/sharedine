@@ -34,7 +34,6 @@ async function getAllAppointments() {
 
     //store data in json
     let data = await response.json();
-    console.log(data);
     const body = document.getElementById('items')
     if (response) {
         data.forEach(data => {
@@ -130,6 +129,59 @@ async function addAppointment() {
     
         return response
 }
+
+async function fetchOldAppointmentData() {
+    const meal = document.getElementById('validationMeal');
+    const date = document.getElementById('validationDate');
+    const time = document.getElementById('validationTime'); 
+    const location = document.getElementById('validationLocation');
+    const price = document.getElementById('validationPrice');
+    const info = document.getElementById('validationInfo');
+    const response = await fetch(appointmentAPI);
+    let data = await response.json();
+    if (response) {
+        data.forEach(data => {
+            if (sessionStorage.appointmentID == data.id){
+                meal.value = data.name;
+                date.value = data.date;
+                time.value = data.time;
+                location.value = data.location;
+                price.value = data.price;
+                info.value = data.information;
+            }
+        })
+    };
+}
+
+async function editAppointment() {
+    const owner_id = sessionStorage.currentID;
+    const id = sessionStorage.appointmentID;
+    const meal = document.getElementById('validationMeal').value;
+    const date = document.getElementById('validationDate').value;
+    const time = document.getElementById('validationTime').value; 
+    const location = document.getElementById('validationLocation').value;
+    const price = document.getElementById('validationPrice').value;
+    const info = document.getElementById('validationInfo').value;
+    event.preventDefault();
+    const response = await fetch(`http://127.0.0.1:3002/appointments/${id}?&name=${meal}&date=${date}&time=${time}&location=${location}&price=${price}&info=${info}`, {
+        method: 'PUT'
+    });
+        window.location = '/pages/homeScreen.html';
+    
+        return response
+}
+
+async function removeAppointment() {
+    const id = sessionStorage.appointmentID;
+    event.preventDefault();
+    const response = await fetch(`http://127.0.0.1:3002/appointments/${id}`, {
+        method: 'DELETE'
+    });
+        window.location = '/pages/homeScreen.html';
+    
+        return response
+}
+
 
 // function validation() {
   
