@@ -91,13 +91,17 @@
           <h1 id="welcome"> Welcome (User) </h1>
         </div>
           <div class="p-2">
-            <a type="button" class="btn btn-dark" href="/pages/addAppointment.html">Add</a>
+            <a type="button" class="btn btn-info" href="/pages/addAppointment.html">Add</a>
           </div>
       </div>
 
     <hr>
     <div class="py-5">
-      <h3>You have the following appointments scheduled:</h3>
+      <div id="no-content">
+        <h3 id="homescreenEvents">You currently have no appointments.</h3>
+        <a href="/pages/appointments.html"><button class="btn btn-info">Search for Appointments</button></a>
+      </div>
+      
         <div class="item-list" id="items"></div>
     </div>
         
