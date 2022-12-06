@@ -14,7 +14,7 @@
     <title>ShareDine</title>
   </head>
 
-  <body onload="{getFriendsList(); checkLoggedIn()}">
+  <body onload="{findNewFriends(); checkLoggedIn()}">
     <div class="container">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg fixed-top nav-color">
@@ -130,18 +130,9 @@
       <!-- Navbar -->
 
       <div class="top-header">
-        <h1>Friend Requests:</h1>
+        <h1 id="status-text">Meet new people:</h1>
         <div class="container">
-          <div class="col">
-            <div class="friend-list" id="pending-list"><p>None</p></div>
-          </div>
-          <div class="col">
-            <a href="/pages/addFriends.html"><button class="btn btn-primary">Add new friends</button></a>
-          </div>
-        </div>
-        <h1 id="status-text">You have no friends.</h1>
-        <div class="container">
-          <div class="friend-list" id="friends-list"></div>
+          <div class="friend-list" id="users-list"></div>
         </div>
       </div>
     </div>
