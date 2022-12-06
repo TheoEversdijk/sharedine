@@ -29,7 +29,7 @@ services:
       - '../sharedine-friends:/app/sharedine-friends'
     working_dir: /app/sharedine-friends/
     ports:
-      - "3002:3002"
+      - "3003:3003"
     command: > 
       bash -c
       "npm install
