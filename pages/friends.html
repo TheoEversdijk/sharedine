@@ -11,7 +11,7 @@
     <title>ShareDine</title>
 </head>
 
-<body onload="{getAppointments(); checkLoggedIn()}">
+<body onload="{getFriendsList(); checkLoggedIn()}">
 
     <div class="container">
 <!-- Navbar -->
@@ -86,7 +86,12 @@
   <!-- Navbar -->
 
   <div class="top-header">
-    <h1>You have no friends.</h1>
+    <div class="container">
+      <div id="friends-list">
+        <h1 id="status-text">You have no friends.</h1>
+
+      </div>
+    </div>
   </div>
 
 
@@ -95,7 +100,7 @@
   <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script src="../js/index.js"></script>
-    <script src="../js/appointment.js"></script>
+    <script src="../js/friends.js"></script>
 </body>
 
 </html>
