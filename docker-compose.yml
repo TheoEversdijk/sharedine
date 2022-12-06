@@ -22,3 +22,15 @@ services:
       bash -c
       "npm install
       && npm run start"
+      
+  friends:
+    image: node
+    volumes:
+      - '../sharedine-friends:/app/sharedine-friends'
+    working_dir: /app/sharedine-friends/
+    ports:
+      - "3002:3002"
+    command: > 
+      bash -c
+      "npm install
+      && npm run start"
