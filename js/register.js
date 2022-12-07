@@ -5,7 +5,7 @@ async function register() {
         const name = document.getElementById('validationName').value;
         const email = document.getElementById('validationEmail').value;
         const password = document.getElementById('validationPassword').value; 
-        const response = await fetch(`http://127.0.0.1:3001/users?username=${name}&email=${email}&password=${password}`, {
+        const response = await fetch(userAPI + `/register?username=${name}&email=${email}&password=${password}`, {
             method: 'POST'
         });
     

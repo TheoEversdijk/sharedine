@@ -27,18 +27,17 @@ async function login() {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value; 
     event.preventDefault()
-    const response = await fetch(userAPI);
-
-    //store data in json
-    let data = await response.json();
-    let accounts = [];
-    accounts= data.data;
-    accounts.forEach(account => {
-        if (account.email === email && account.password === password){
-            sessionStorage.setItem('currentID', account.id);
-            window.location = '/pages/homeScreen.html';
-        }
+    const response = await fetch(userAPI + `/login?email=${email}&password=${password}`, {
+        method: 'GET'
     });
+    let login = await response.json();
+    console.log(login);
+    if (login.id) {
+        sessionStorage.setItem('currentID', login.id);
+        window.location = '../pages/homeScreen.html';
+    } else {
+        console.log(login.message);
+    }
 }
 
 function logout() {
