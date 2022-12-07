@@ -90,9 +90,9 @@ async function getAppointment() {
             <p>Time: ${data.time}</p>
             <p>Price: €${data.price}</p>
             <div class="register-button">
-              <a href="https://www.youtube.com/shorts/w1_u9uGchMY"><button type="button" class="btn btn-info">Register</button></a>
+                <a href="#"><button type="button" class="btn btn-info" onclick="appointmentRegister()">Register</button></a>
+              </div>
             </div>
-          </div>
     </div>
     <div class="row content-row-2">
       <div class="col-lg-6 col-md-6 description">
@@ -116,6 +116,19 @@ async function getAppointment() {
             }
         });
     }
+}
+
+// Register for an appointment
+async function appointmentRegister() {
+        const members = sessionStorage.currentID;
+        const id = sessionStorage.appointmentID;
+        const response = await fetch(`http://127.0.0.1:3002/appointments/${id}/register?members=${members}`, {
+            method: 'PUT'
+        });
+        window.location = '/pages/homeScreen.html';
+        return response
+    
+
 }
 
 function StoreID(id) {
