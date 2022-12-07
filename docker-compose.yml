@@ -34,3 +34,15 @@ services:
       bash -c
       "npm install
       && npm run start"
+
+  chat:
+    image: node
+    volumes:
+      - '../sharedine-chat:/app/sharedine-chat'
+    working_dir: /app/sharedine-chat/
+    ports:
+      - "3004:3004"
+    command: > 
+      bash -c
+      "npm install
+      && npm run start"
