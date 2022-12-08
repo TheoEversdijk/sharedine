@@ -61,11 +61,19 @@
 }
 
 .chat-list > li {
-  padding-bottom: 4em;
+  padding-bottom: 2em;
+  padding-top: 2em;
   border: 2px solid black;
+}
+
+.chat-list > li > img {
   margin-left: auto;
   margin-right: auto;
   display: block;
+}
+
+.chat-list > li > div > p {
+  text-a
 }
 
 .chat-history {

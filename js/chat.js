@@ -10,7 +10,7 @@ async function getAllChats() {
       data.forEach(data => {
               let listItem = document.createElement('div');
               listItem.innerHTML = 
-              `<a href="/pages/chatroom.html" onclick="StoreID(${data.id})">
+              `<a href="/pages/chatroom.html?chat_id=${data.id}">
               <p>Chat ID: ${data.id}</p>
               <p>Created at: ${data.created_at}</p>
               <p>Members: ${data.members}</p>
@@ -46,4 +46,9 @@ async function removeChat() {
 
 function StoreID(id) {
   sessionStorage.setItem("chatID", id);
+}
+
+async function getAppointment() {
+  const response = await fetch(chatAPI);
+
 }
