@@ -50,7 +50,6 @@ async function checkIfInFriendsList(users) {
 }
 
 async function sendFriendRequest(id) {
-    event.preventDefault();
     const from = sessionStorage.currentID;
     console.log("Friend Request Send to " + id)
     const response = await fetch(friendsAPI + `?from=${from}&to=${id}`, {
@@ -60,14 +59,19 @@ async function sendFriendRequest(id) {
 }
 
 async function acceptRequest(id) {
-    event.preventDefault();
-    console.log("Friend Request accepted")
+    console.log("Friend Request Accepted")
     const response = await fetch(friendsAPI + `?id=${id}`, {
         method: 'PUT'
     });
     return response
 }
 
-// async function declineRequest()
+async function declineRequest(id) {
+    console.log("Friend Request Declined")
+    const response = await fetch(friendsAPI + `?id=${id}`, {
+        method: 'DELETE'
+    });
+    return response
+}
 
 // async function blockUser()

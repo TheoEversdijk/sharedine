@@ -7,10 +7,8 @@ async function getFriendsList() {
     const list = document.getElementById('friends-list');
     const statusText = document.getElementById('status-text');
     accounts.forEach(account => {
-        console.log(account);
         if (accounts.length > 0) {
             if (account.status === "Pending") {
-                console.log(account);
                 const userCard = document.createElement('div');
                 if (account.requester === "they") {
                     userCard.innerHTML =
@@ -28,7 +26,7 @@ async function getFriendsList() {
                         </div>
                         <div class="col-lg-2 center-text center">
                             <btn onclick="acceptRequest(${account.request})" class="btn btn-success center">Accept Request</btn>
-                            <a href="#" class="btn btn-danger center">Decline Request</a>
+                            <btn onclick="declineRequest(${account.request})" class="btn btn-danger center">Decline Request</btn>
                             <a href="#" class="btn btn-warning center">Block User</a>
                         </div>
                         </div>
@@ -106,7 +104,6 @@ async function getFriendsList() {
     async function searchUsers(friends) {
         const response = await fetch(userAPI);
         let data = await response.json();
-        console.log(friends);
         let users = data.data;
         const userlist = [];
         users.forEach(user => {
