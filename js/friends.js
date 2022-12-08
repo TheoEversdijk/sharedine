@@ -7,8 +7,10 @@ async function getFriendsList() {
     const list = document.getElementById('friends-list');
     const statusText = document.getElementById('status-text');
     accounts.forEach(account => {
+        console.log(account);
         if (accounts.length > 0) {
             if (account.status === "Pending") {
+                console.log(account);
                 const userCard = document.createElement('div');
                 if (account.requester === "they") {
                     userCard.innerHTML =
@@ -25,7 +27,7 @@ async function getFriendsList() {
                             <h5 class="">${account.user.name}</h5>
                         </div>
                         <div class="col-lg-2 center-text center">
-                            <a href="#" class="btn btn-success center">Accept Request</a>
+                            <btn onclick="acceptRequest(${account.request})" class="btn btn-success center">Accept Request</btn>
                             <a href="#" class="btn btn-danger center">Decline Request</a>
                             <a href="#" class="btn btn-warning center">Block User</a>
                         </div>
@@ -85,28 +87,32 @@ async function getFriendsList() {
     async function getFriends() {
         const response = await fetch(friendsAPI);
         let data = await response.json();
-        const friendlist = [];
-        data.data.forEach(friend => {
-            if (friend.from == sessionStorage.currentID || friend.to == sessionStorage.currentID) {
-                if (sessionStorage.currentID == friend.from) {
-                    friendlist.push({ id: friend.to, status: friend.status, requester: "me" });
-                } else {
-                    friendlist.push({ id: friend.from, status: friend.status, requester: "they" });
+        const friends = data.data
+        if (friends.length > 0) {
+            const friendlist = [];
+            friends.forEach(friend => {
+                if (friend.from == sessionStorage.currentID || friend.to == sessionStorage.currentID) {
+                    if (sessionStorage.currentID == friend.from) {
+                        friendlist.push({ request:friend.id, id: friend.to, status: friend.status, requester: "me" });
+                    } else {
+                        friendlist.push({ request:friend.id, id: friend.from, status: friend.status, requester: "they" });
+                    }
                 }
-            }
-        });
-        return friendlist;
+            });
+            return friendlist;
+        }
     }
 
     async function searchUsers(friends) {
         const response = await fetch(userAPI);
         let data = await response.json();
+        console.log(friends);
         let users = data.data;
         const userlist = [];
         users.forEach(user => {
             friends.forEach(friend => {
                 if (user.id == friend.id) {
-                    userlist.push({user, status: friend.status, requester: friend.requester});
+                    userlist.push({user, request:friend.request, status: friend.status, requester: friend.requester});
                 }
             })
         })
