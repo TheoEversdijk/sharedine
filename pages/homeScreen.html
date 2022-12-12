@@ -72,7 +72,7 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <li><a class="dropdown-item" href="#">My profile</a></li>
-              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><a class="dropdown-item" href="/pages/settings.html">Settings</a></li>
               <li><a class="dropdown-item" onclick="logout()">Logout</a></li>
             </ul>
           </li>
@@ -85,27 +85,26 @@
   </nav>
   <!-- Navbar -->
 
-    <div class="container">
-      <div class="home-header d-flex">
-        <div class="me-auto p-2">
-          <h1 id="welcome"> Welcome (User) </h1>
-        </div>
-          <div class="p-2">
-            <a type="button" class="btn btn-info" href="/pages/addAppointment.html">Add</a>
-          </div>
+  <!-- Appointment cards -->
+  <!-- gelieve afblijven ik ga deze shit niet nog een keer fixen -->
+  <div class="container home-header">
+    <div class="d-flex">
+      <div class="me-auto p-2">
+        <h1 id="welcome"></h1>
       </div>
+    </div>
+    
+    <hr> 
 
-    <hr>
-    <div class="py-5">
-      <div id="no-content">
+    <div class=" d-flex">
+      <div class="me-auto p-2 no-content" id="no-content">
         <h3 id="homescreenEvents">You currently have no appointments.</h3>
         <a href="/pages/appointments.html"><button class="btn btn-info">Search for Appointments</button></a>
       </div>
-      
-        <div class="item-list" id="items"></div>
     </div>
-        
+    <div class="item-list py-3" id="items"></div>
   </div>
+
 </div>
 
 
