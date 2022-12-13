@@ -158,6 +158,7 @@ async function addAppointment() {
         const response = await fetch(`http://127.0.0.1:3002/appointments?owner_id=${owner_id}&name=${meal}&date=${date}&time=${time}&location=${location}&price=${price}&info=${info}`, {
             method: 'POST'
         });
+
         window.location = '/pages/homeScreen.html';
 
         return response

@@ -9,8 +9,7 @@ async function register() {
             method: 'POST'
         });
     
-          window.location = '../../index.html';
-        
+        // loginAfterRegister(email, password);
           return response
     }
 }

@@ -1,5 +1,5 @@
 .top-header {
-    padding-top: 15em;
+    padding-top: 10em;
 }
 
 .nav-color {
@@ -21,9 +21,10 @@
     padding-top: 2em;
 }
 
-.description {
-  /* padding-top: 2em; */
-}
+/* .description {
+  padding-top: 2em;
+} 
+*/
 
 .participants {
   padding-left: 10em;
@@ -33,3 +34,7 @@
   padding-top: 4em;
 }
 
+.tt:hover {
+  color: #888888;
+  transition: .3s;
+}

@@ -10,15 +10,18 @@ async function getAllChats() {
       data.forEach(data => {
               let listItem = document.createElement('div');
               listItem.innerHTML = 
-              `<a class="no-decoration" href="/pages/chatroom.html?chat_id=${data.id}">
-              <div class="container py-3">
-                <div class="card">
-                  <p>${data.name}</p>
-                  <small>Created on ${data.created_at}</small>
-                </div>
-              </div>
-            </a>
-            `
+                `<btn class="no-decoration chat-button" onclick="loadChat(${data.id})">
+                  <div class="container border py-3 row">
+                    <div class="col-lg-3 center">
+                      <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg" class="rounded-circle chat-img"
+                      alt="" loading="lazy" />
+                   </div>
+                    <div class="col-lg-9">
+                      <p>${data.name}</p>
+                      <small>Created on ${data.created_at}</small>
+                    </div>
+                  </div>
+                </btn>`
               body.append(listItem);
       });
   }
@@ -46,8 +49,9 @@ async function removeChat() {
       return response
 }
 
-function StoreID(id) {
-  sessionStorage.setItem("chatID", id);
+function loadChat(id) {
+  const chatscreen = document.getElementById('chatroom-content');
+  chatscreen.innerHTML = `<iframe src="http://127.0.0.1:5500/pages/chatroom.html?chat_id=${id}" height="450px" class="col-lg-12 border" id="chatroom"></iframe>`
 }
 
 async function getChat() {
@@ -59,17 +63,15 @@ async function getChat() {
   //store data in json
   let data = await response.json();
   // console.log(data)
-  const body = document.getElementById('information')
+  const body = document.getElementById('messages')
   if (response) {
       data.forEach(data => {
               let listItem = document.createElement('div');
               listItem.innerHTML = 
-              `<p>Message ID: ${data.id}</p>
-              <p>Created at: ${data.created_at}</p>
-              <p>Message: ${data.message}</p>
-              <p>Chat ID: ${data.chat_id}</p>
+              `<div class="card">
               <p>Owner ID: ${data.owner_id}</p>
-              <br>`
+              <p>${data.message}</p>
+              <small><p>Created at: ${data.created_at}</p></small>`
               body.append(listItem);
       });
   }
