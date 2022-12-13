@@ -10,13 +10,15 @@ async function getAllChats() {
       data.forEach(data => {
               let listItem = document.createElement('div');
               listItem.innerHTML = 
-              `<a href="/pages/chatroom.html?chat_id=${data.id}">
-              <p>Chat ID: ${data.id}</p>
-              <p>Created at: ${data.created_at}</p>
-              <p>Members: ${data.members}</p>
-              <p>Owner ID: ${data.owner_id}</p>
-              </a>
-              <br>`
+              `<a class="no-decoration" href="/pages/chatroom.html?chat_id=${data.id}">
+              <div class="container py-3">
+                <div class="card">
+                  <p>${data.name}</p>
+                  <small>Created on ${data.created_at}</small>
+                </div>
+              </div>
+            </a>
+            `
               body.append(listItem);
       });
   }
@@ -48,7 +50,27 @@ function StoreID(id) {
   sessionStorage.setItem("chatID", id);
 }
 
-async function getAppointment() {
-  const response = await fetch(chatAPI);
+async function getChat() {
+  const queryParams = new URLSearchParams(window.location.search);
+  const chat_id = queryParams.get('chat_id');
+  // console.log(chat_id)
+  const response = await fetch(`http://127.0.0.1:3004/chat/${chat_id}`);
 
+  //store data in json
+  let data = await response.json();
+  // console.log(data)
+  const body = document.getElementById('information')
+  if (response) {
+      data.forEach(data => {
+              let listItem = document.createElement('div');
+              listItem.innerHTML = 
+              `<p>Message ID: ${data.id}</p>
+              <p>Created at: ${data.created_at}</p>
+              <p>Message: ${data.message}</p>
+              <p>Chat ID: ${data.chat_id}</p>
+              <p>Owner ID: ${data.owner_id}</p>
+              <br>`
+              body.append(listItem);
+      });
+  }
 }

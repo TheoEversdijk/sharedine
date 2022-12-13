@@ -5,14 +5,23 @@ async function getPersonalAppointments() {
 
     //store data in json
     let data = await response.json();
-    console.log(data);
     const body = document.getElementById('items')
     let appointmentsStatus = document.getElementById('homescreenEvents');
     const noContent = document.getElementById('no-content')
     if (response) {
         if (data.length != 0) {
             data.forEach(data => {
-                if (sessionStorage.currentID == data.owner_id){
+                let members = data.members;
+                let joined = false;
+
+                if (members !== null) {
+                    members.forEach(member => {
+                        if (member === Number(sessionStorage.currentID)){
+                            joined = true;
+                        }
+                    })
+                }
+                if (sessionStorage.currentID == data.owner_id || joined){
 
                     // TODO: make this less janky
                     appointmentsStatus.textContent = "You have the following appointments scheduled:";
@@ -21,22 +30,22 @@ async function getPersonalAppointments() {
                     let listItem = document.createElement('div');
                     listItem.innerHTML = 
                     `<a href="/pages/appointmentDetails.html" onclick="StoreID(${data.id})" class="no-decoration">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h5 class="card-title">${data.name}</h5>
-                                        <p class="card-text">Date: ${data.date}</p>
-                                        <p class="card-text">Location: ${data.location}</p>
-                                        <p class="card-text">Price per portion: €${data.price}</p>
-                                        <p class="card-text"><small class="text-muted">Time: ${data.time}</small></p>
-                                </div>
-                            </div>
-                        </a>`
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">${data.name}</h5>
+                                <p class="card-text">Date: ${data.date}</p>
+                                <p class="card-text">Location: ${data.location}</p>
+                                <p class="card-text">Price per portion: €${data.price}</p>
+                                <p class="card-text"><small class="text-muted">Time: ${data.time}</small></p>
+                        </div>
+                    </div>
+                </a>`
                     body.append(listItem);
                 }
             });
         }
     }
-}
+} 
 
 async function getAllAppointments() {
     const response = await fetch(appointmentAPI);
@@ -102,10 +111,7 @@ async function getAppointment() {
       <div class="col-lg-6 col-md-6 participants">
         <h1>Participants</h1>
         <ul>
-          <li>henk</li>
-          <li>piet</li>
-          <li>jochem</li>
-          <li>Achmed Alijahardi Kulmar</li>
+          <li>TBA</li>
         </ul>
       </div>
     </div>

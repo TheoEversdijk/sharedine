@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="../../styles/friends.css" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ShareDine</title>
+  <title>ShareDine - Friends</title>
 </head>
 
 <body onload="{getFriendsList(); checkLoggedIn()}">
@@ -78,23 +78,31 @@
     <div class="container">
       <div class="top-header d-flex">
         <div class="me-auto p-2">
-          <h1>Friend Requests:</h1>
+          <h1>Friend Requests</h1>
         </div>
         <div class="p-2">
-          <a href="/pages/addFriends.html"><button class="btn btn-primary">Add new friends</button></a>
+          <a href="/pages/addFriends.html"><button class="btn btn-info">Add</button></a>
         </div>
       </div>
+
+      <hr>
+
       <div class="container">
         <div class="col">
           <div class="friend-list" id="pending-list"></div>
         </div>
       </div>
-      <div class="me-auto p-2">
-        <h1 id="status-text">You have no friends.</h1>
+
+      <div class="container py-5">
+         <div class="me-auto p-2">
+        <h1 id="status-text">You currently have no friends.</h1>
+        <a id="status-text2" href="/pages/addFriends.html"><button class="btn btn-info">Add your first Friends</button></a>
       </div>
       <div class="container">
         <div class="friend-list" id="friends-list"></div>
       </div>
+      </div>
+     
     </div>
   </div>
   </div>

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../../styles/appointment.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShareDine</title>
+    <title>ShareDine - Edit Appointment</title>
 </head>
 
 <body onload="{checkLoggedIn(); fetchOldAppointmentData()}">
@@ -69,7 +69,7 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <li><a class="dropdown-item" href="#">My profile</a></li>
-              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><a class="dropdown-item" href="/pages/settings.html">Settings</a></li>
               <li><a class="dropdown-item" onclick="logout()">Logout</a></li>
             </ul>
           </li>
@@ -83,8 +83,9 @@
   <!-- Navbar -->
 
   <div class="container top-header">
-    <h1 class="display-1">Edit Appointment</h1>
-
+    <div class="me-auto p-2">
+      <h1>Edit Appointment</h1>
+    </div>
     <hr class="py-2"> 
 
     <div class="form-outline mb-4">

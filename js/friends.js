@@ -6,6 +6,7 @@ async function getFriendsList() {
     const pendinglist = document.getElementById('pending-list');
     const list = document.getElementById('friends-list');
     const statusText = document.getElementById('status-text');
+    const statusText2 = document.getElementById('status-text2');
     accounts.forEach(account => {
         if (accounts.length > 0) {
             if (account.status === "Pending") {
@@ -25,8 +26,8 @@ async function getFriendsList() {
                             <h5 class="">${account.user.name}</h5>
                         </div>
                         <div class="col-lg-2 center-text center">
-                            <btn onclick="acceptRequest(${account.request})" class="btn btn-success center">Accept Request</btn>
-                            <btn onclick="declineRequest(${account.request})" class="btn btn-danger center">Decline Request</btn>
+                            <btn onclick="{acceptRequest(${account.request}), location.reload();}" class="btn btn-success center">Accept Request</btn>
+                            <btn onclick="{declineRequest(${account.request}), location.reload();}" class="btn btn-danger center">Decline Request</btn>
                             <a href="#" class="btn btn-warning center">Block User</a>
                         </div>
                         </div>
@@ -54,6 +55,7 @@ async function getFriendsList() {
                 pendinglist.append(userCard);
             } if (account.status === "Friends") {
                 statusText.textContent = "Friends List";
+                statusText2.textContent = "";
                 const userCard = document.createElement('div');
                 userCard.innerHTML =
                     `<div class="card col-lg-12 d-flex">
@@ -72,7 +74,7 @@ async function getFriendsList() {
                             </p>
                     </div>
                     <div class="col-lg-2 center-text center">
-                        <a href="#" class="btn btn-primary">Invite to an appointment</a>
+                        <a href="#" class="btn btn-info">Invite to an appointment</a>
                     </div>
                     </div>
                 </div>`;

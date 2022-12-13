@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="../../styles/appointment-page.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShareDine</title>
+    <title>ShareDine - Appointments</title>
 </head>
 
-<body onload="{getAllAppointments(); checkLoggedIn(); account()}">
+<body onload="{getAllAppointments(); checkLoggedIn();}">
 
     <div class="container">
       <!-- Navbar -->
@@ -98,6 +98,9 @@
           Search
           </button>
         </form>
+      </div>
+      <div class="p-2">
+        <a type="button" class="btn btn-info" href="/pages/addAppointment.html">Add</a>
       </div>
     </div>
     

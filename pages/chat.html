@@ -8,10 +8,10 @@
   <link rel="stylesheet" href="../../styles/chat.css">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShareDine</title>
+  <title>ShareDine - Chats</title>
 </head>
 
-<body onload="{getAllChats(); checkLoggedIn(); account()}">
+<body onload="{getAllChats(); checkLoggedIn();}">
 
   <div class="container">
     <!-- Navbar -->
@@ -62,7 +62,7 @@
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <li><a class="dropdown-item" href="#">My profile</a></li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="/pages/settings.html">Settings</a></li>
                 <li><a class="dropdown-item" onclick="logout()">Logout</a></li>
               </ul>
             </li>
@@ -83,23 +83,26 @@
       </div>
       <div class="p-2">
         <a type="button" class="btn btn-info" href="/pages/addChat.html">Add</a>
-
-        <!-- Search form -->
-        <form class="input-group" style="width: 400px">
-          <input type="search" class="form-control" placeholder="this doesn't work yet" aria-label="Search" />
-          <button class="btn btn-info" type="button" style="padding: .45rem 1.5rem .35rem;">
-            Search
-          </button>
-        </form>
       </div>
     </div>
 
 
+
     <hr>
 
-    <!-- COMMENT DEZE FUCKING NIET -->
-    <div class="item-list py-3" id="chats-list"></div>
-    <!-- DANK U -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2" id="chatroom-list">
+          <!-- COMMENT DEZE FUCKING NIET -->
+          <div class="item-list py-3" id="chats-list"></div>
+          <!-- DANK U -->
+        </div>
+        <div class="col-lg-10" id="chatroom-content">
+          <!-- <iframe src="http://127.0.0.1:5500/pages/chatroom.html?chat_id=6" class="col-lg-12" id="chatroom"></iframe> -->
+        <!-- </div> -->
+      </div>
+    </div>
+
 
     <div class="container">
       <div class="row">
@@ -127,7 +130,7 @@
             </li>
             <li class="clearfix">
               <img
-                src="https://preview.redd.it/nztoe44mj4921.jpg?width=640&crop=smart&auto=webp&s=10fc5c48fe8337e622714631a60d2c3f018431bf"
+                src="https://play-lh.googleusercontent.com/i1qvljmS0nE43vtDhNKeGYtNlujcFxq72WAsyD2htUHOac57Z9Oiew0FrpGKlEehOvo=w240-h480-rw"
                 alt="avatar" class="avatar rounded-circle">
               <div class="about">
                 <p class="name">Hugo</p>
@@ -156,7 +159,7 @@
             <div class="message-data text-right">
               <img src="https://i.pinimg.com/originals/10/91/94/1091948c6b80b65b9eef8c163f0ae42a.jpg" class="rounded-circle" alt="avatar"
                 height="90" loading="lazy">
-                <span class="message-data-time"> Elizabeth </span>
+                <span class="message-data-time"> Nick </span>
               </div> 
               <span class="message-data-time">10:10 AM, Today</span>
           </div>
@@ -164,19 +167,19 @@
           <div class="chat-history">
             <ul class="m-b-0">
               <li class="clearfix">
-                <div class="message other-message float-right"> Hi Jadeoki, you are drunk? </div>
+                <div class="message other-message float-right"> Hi Stephen, are drunk? </div>
               </li>
               <li class="clearfix">
                 <div class="message-data">
                   <span class="message-data-time">10:12 AM, Today</span>
                 </div>
-                <div class="message my-message">no i was not dronk.</div>
+                <div class="message my-message">No, I wasn't drunk.</div>
               </li>
               <li class="clearfix">
                 <div class="message-data">
                   <span class="message-data-time">10:15 AM, Today</span>
                 </div>
-                <div class="message my-message">yes you were. You threw my hampter across the room and yelled: GO
+                <div class="message my-message">Yes you were. You threw my hamster across the room and yelled: GO
                   PIKACHU I CHOOSE YOU!!!</div>
               </li>
             </ul>
@@ -196,8 +199,3 @@
 </body>
 
 </html>
->
-
-      <div class="p-2">
-        <a type="button" class="btn btn-info" href="/pages/addChat.html">Add</a>
-      </div>

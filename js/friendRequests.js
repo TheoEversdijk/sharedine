@@ -25,7 +25,7 @@ async function findNewFriends() {
                             </p>
                     </div>
                     <div class="col-lg-2 center-text center" id="${user.id}">
-                        <button onclick="sendFriendRequest(${user.id})" class="btn btn-primary">Send Friend Request</button>
+                        <button onclick="{sendFriendRequest(${user.id}), location.reload();}" class="btn btn-info">Send Friend Request</button>
                     </div>
                     </div>
                 </div>`;
@@ -55,7 +55,7 @@ async function sendFriendRequest(id) {
     const response = await fetch(friendsAPI + `?from=${from}&to=${id}`, {
         method: 'POST'
     });
-    return response
+    return response;
 }
 
 async function acceptRequest(id) {
