@@ -4,21 +4,28 @@ async function register() {
     const name = document.getElementById('validationName').value;
     const email = document.getElementById('validationEmail').value;
     const password = document.getElementById('validationPassword').value;
+
+    // TODO: Show the user it is registering
     console.log("Registering...")
-    console.log(email, password)
     const response = await fetch(userAPI + '/register', {
         headers: {
-            'Content-type': 'application/json'
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
         },
         method: 'POST',
-        data: {
+        body: JSON.stringify({
+            'name': name,
             'email': email,
             'password': password
-        }
-    }
-    );
+        }),
+    },
+    ).then((response) => response.json());
 
-    // window.location = '../../index.html';
-
-    return response
+    if (response === "The account has been created.") {
+        // TODO: Send the user to a page to verify their email
+        window.location = '../../index.html';
+    } else {
+        // TODO: Send the user the error message
+        console.log(response)
+    };
 };
