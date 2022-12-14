@@ -21,22 +21,22 @@
                     <div class="card-body p-5">
                       <img src="../resources/images/sharedine-low-resolution-logo-black-on-transparent-background.png" class="login-img">
         
-                      <form>
+                      <form class="has-validation">
                         <div id="message"></div>
         
                         <div class="form-outline mb-4">
                             <label class="form-label" for="email">Email</label>
-                            <input type="email" id="email" class="form-control form-control-lg" required/>
+                            <input type="email" id="validationEmail" class="form-control form-control-lg" required/>
                             <div class="invalid-feedback">
-                              Please enter an email.
+                              Please enter your email.
                             </div>
                         </div>
         
-                        <div class="form-outline mb-4" id="">
+                        <div class="form-outline mb-4">
                             <label class="form-label" for="password">Password</label>
-                            <input type="password" id="password" class="form-control form-control-lg" required/>
+                            <input type="password" id="validationPassword" class="form-control form-control-lg" required/>
                             <div class="invalid-feedback">
-                              Please enter an email.
+                              Please enter your password.
                             </div>
                         </div>
         

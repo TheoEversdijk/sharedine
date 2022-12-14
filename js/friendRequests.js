@@ -74,4 +74,11 @@ async function declineRequest(id) {
     return response
 }
 
-// async function blockUser()
+// Still needs to be fixed
+async function blockUser(id) {
+    console.log("Friend Request Blocked")
+    const response = await fetch(friendsAPI + `/block?id=${id}`, {
+        method: 'PUT'
+    });
+    return response
+}

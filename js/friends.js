@@ -30,7 +30,7 @@ async function getFriendsList() {
                         <div class="col-lg-2 center-text center">
                             <btn onclick="{acceptRequest(${account.request}), location.reload();}" class="btn btn-success center">Accept Request</btn>
                             <btn onclick="{declineRequest(${account.request}), location.reload();}" class="btn btn-danger center">Decline Request</btn>
-                            <a href="#" class="btn btn-warning center">Block User</a>
+                            <btn onclick="{blockUser(${account.request}), location.reload();}" class="btn btn-warning center">Block User</btn>
                         </div>
                         </div>
                     </div>`;

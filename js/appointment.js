@@ -1,4 +1,5 @@
 const appointmentAPI = "http://127.0.0.1:3002/appointments";
+const chatAPI = "http://127.0.0.1:3004/chat";
 
 async function getPersonalAppointments() {
     const response = await fetch(appointmentAPI);
@@ -16,20 +17,20 @@ async function getPersonalAppointments() {
 
                 if (members !== null) {
                     members.forEach(member => {
-                        if (member === Number(sessionStorage.currentID)){
+                        if (member === Number(sessionStorage.currentID)) {
                             joined = true;
                         }
                     })
                 }
-                if (sessionStorage.currentID == data.owner_id || joined){
+                if (sessionStorage.currentID == data.owner_id || joined) {
 
                     // TODO: make this less janky
                     appointmentsStatus.textContent = "You have the following appointments scheduled:";
                     noContent.innerHTML = "";
 
                     let listItem = document.createElement('div');
-                    listItem.innerHTML = 
-                    `<a href="/pages/appointmentDetails.html" onclick="StoreID(${data.id})" class="no-decoration">
+                    listItem.innerHTML =
+                        `<a href="/pages/appointmentDetails.html" onclick="StoreID(${data.id})" class="no-decoration">
                     <div class="card mb-3">
                         <div class="card-body">
                             <h5 class="card-title">${data.name}</h5>
@@ -45,7 +46,7 @@ async function getPersonalAppointments() {
             });
         }
     }
-} 
+}
 
 async function getAllAppointments() {
     const response = await fetch(appointmentAPI);
@@ -55,8 +56,8 @@ async function getAllAppointments() {
     const body = document.getElementById('items')
     if (response) {
         data.forEach(data => {
-                let listItem = document.createElement('div');
-                listItem.innerHTML = 
+            let listItem = document.createElement('div');
+            listItem.innerHTML =
                 `<a href="/pages/appointmentDetails.html" onclick="StoreID(${data.id})" class="no-decoration">
                         <div class="card mb-3">
                             <div class="card-body">
@@ -68,7 +69,7 @@ async function getAllAppointments() {
                             </div>
                         </div>
                     </a>`
-                body.append(listItem);
+            body.append(listItem);
         });
     }
 }
@@ -81,13 +82,13 @@ async function getAppointment() {
     const body = document.getElementById('information')
     if (response) {
         data.forEach(data => {
-            if (sessionStorage.appointmentID == data.id){
+            if (sessionStorage.appointmentID == data.id) {
                 let listItem = document.createElement('div');
                 let title = document.createElement('h1');
                 title.textContent = `${data.name}`;
-                
-                listItem.innerHTML = 
-                `  
+
+                listItem.innerHTML =
+                    `  
                 <div class="container">
     <div class="row">
         <div class="col-lg-6 col-md-6" id="image">
@@ -126,16 +127,29 @@ async function getAppointment() {
 
 // Register for an appointment
 async function appointmentRegister() {
-        const members = sessionStorage.currentID;
-        const id = sessionStorage.appointmentID;
-        const response = await fetch(`http://127.0.0.1:3002/appointments/${id}/register?members=${members}`, {
-            method: 'PUT'
-        });
-        window.location = '/pages/homeScreen.html';
-        return response
-    
+    const members = sessionStorage.currentID;
+    const id = sessionStorage.appointmentID;
+    const response = await fetch(`http://127.0.0.1:3002/appointments/${id}/register?members=${members}`, {
+        method: 'PUT'
+    });
 
+    const chat_id = sessionStorage.appointmentID - 203; //TODO: DO THIS LIKE A SANE PERSON
+
+    const response2 = await fetch(`${chatAPI}/${chat_id}/register?members=${members}`, {
+        method: 'PUT'
+    });
+
+    // chatRegister(id);
+    window.location = '/pages/homeScreen.html';
+    return response
 }
+
+// async function chatRegister(userID) {
+//     // Get current userID
+//     // Get chatID
+//     // 
+
+// }
 
 function StoreID(id) {
     sessionStorage.setItem("appointmentID", id);
@@ -154,8 +168,21 @@ async function addAppointment() {
         const location = document.getElementById('validationLocation').value;
         const price = document.getElementById('validationPrice').value;
         const info = document.getElementById('validationInfo').value;
+
+        const today = new Date().toISOString().slice(0, 10)
+
         event.preventDefault();
         const response = await fetch(`http://127.0.0.1:3002/appointments?owner_id=${owner_id}&name=${meal}&date=${date}&time=${time}&location=${location}&price=${price}&info=${info}`, {
+            method: 'POST'
+        });
+
+        // id ophalen van appointment om hieronder te gebruiken voor 'appointment_id' column
+        const idResponse = await fetch(`http://127.0.0.1:3002/appointments/getid?owner_id=${owner_id}&name=${meal}&date=${date}`, {
+            method: 'GET'
+        });
+        console.log(idResponse);
+
+        const response2 = await fetch(`${chatAPI}?owner_id=${owner_id}&createdat=${today}&meal=${meal}`, {
             method: 'POST'
         });
 
@@ -168,7 +195,7 @@ async function addAppointment() {
 async function fetchOldAppointmentData() {
     const meal = document.getElementById('validationMeal');
     const date = document.getElementById('validationDate');
-    const time = document.getElementById('validationTime'); 
+    const time = document.getElementById('validationTime');
     const location = document.getElementById('validationLocation');
     const price = document.getElementById('validationPrice');
     const info = document.getElementById('validationInfo');
@@ -176,7 +203,7 @@ async function fetchOldAppointmentData() {
     let data = await response.json();
     if (response) {
         data.forEach(data => {
-            if (sessionStorage.appointmentID == data.id){
+            if (sessionStorage.appointmentID == data.id) {
                 meal.value = data.name;
                 date.value = data.date;
                 time.value = data.time;
@@ -190,11 +217,11 @@ async function fetchOldAppointmentData() {
 
 async function editAppointment() {
     if (validation()) {
-        const owner_id = sessionStorage.currentID;
+        // const owner_id = sessionStorage.currentID;
         const id = sessionStorage.appointmentID;
         const meal = document.getElementById('validationMeal').value;
         const date = document.getElementById('validationDate').value;
-        const time = document.getElementById('validationTime').value; 
+        const time = document.getElementById('validationTime').value;
         const location = document.getElementById('validationLocation').value;
         const price = document.getElementById('validationPrice').value;
         const info = document.getElementById('validationInfo').value;
@@ -202,46 +229,60 @@ async function editAppointment() {
         const response = await fetch(`http://127.0.0.1:3002/appointments/${id}?&name=${meal}&date=${date}&time=${time}&location=${location}&price=${price}&info=${info}`, {
             method: 'PUT'
         });
-            window.location = '/pages/homeScreen.html';
-        
-            return response
+
+        const chat_id = sessionStorage.appointmentID - 203; //TODO: DO THIS LIKE A SANE PERSON
+
+        const response2 = await fetch(`${chatAPI}?chat_id=${chat_id}&meal=${meal}`, {
+            method: 'PUT'
+        });
+
+        window.location = '/pages/homeScreen.html';
+
+        return response
     }
 }
 
 async function removeAppointment() {
-    const id = sessionStorage.appointmentID;
+    let id = sessionStorage.appointmentID;
     event.preventDefault();
     const response = await fetch(`http://127.0.0.1:3002/appointments/${id}`, {
         method: 'DELETE'
     });
-        window.location = '/pages/homeScreen.html';
-    
-        return response
+
+    const chat_id = sessionStorage.appointmentID - 203; //TODO: DO THIS LIKE A SANE PERSON
+
+    const response2 = await fetch(`${chatAPI}?chat_id=${chat_id}`, {
+        method: 'DELETE'
+    });
+
+    window.location = '/pages/homeScreen.html';
+
+    return response
 }
 
 
 function validation() {
-  
+
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
     const forms = document.querySelectorAll('.has-validation')
     const meal = document.getElementById('validationMeal').value;
     const date = document.getElementById('validationDate').value;
-    const time = document.getElementById('validationTime').value; 
+    const time = document.getElementById('validationTime').value;
     const location = document.getElementById('validationLocation').value;
     const price = document.getElementById('validationPrice').value;
     const info = document.getElementById('validationInfo').value;
-  
+
     // Loop over them and prevent submission
     forms.forEach(form => {
         if (form.value == null || form.value == "") {
-          event.preventDefault()
-          event.stopPropagation()
+            event.preventDefault()
+            event.stopPropagation()
         }
-  
-        form.classList.add('was-validated')
-      });
 
-      if (meal !== null && meal !== "" && date !== null && date !== "" && time !== null && time !== "" && location !== null && location !== "" && price !== null && price !== "" && info !== null && info !== "") {
+        form.classList.add('was-validated')
+    });
+
+    if (meal !== null && meal !== "" && date !== null && date !== "" && time !== null && time !== "" && location !== null && location !== "" && price !== null && price !== "" && info !== null && info !== "") {
         return true
-      }
-  }
+    }
+}

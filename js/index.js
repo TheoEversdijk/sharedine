@@ -24,25 +24,46 @@ async function account() {
 }
 
 async function login() {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value; 
-    event.preventDefault()
-    const messagebox = document.getElementById('message');
-    if (email != "" && password != "") {
+    if(validation()) {
+        const email = document.getElementById('validationEmail').value;
+        const password = document.getElementById('validationPassword').value; 
+        event.preventDefault()
+        const messagebox = document.getElementById('message');
         const response = await fetch(userAPI + `/login?email=${email}&password=${password}`, {
             method: 'GET'
         });
         let login = await response.json();
-        console.log(login);
         if (login.id) {
             sessionStorage.setItem('currentID', login.id);
             window.location = '../pages/homeScreen.html';
         } else {
             message.innerHTML = login.message;
+            message.style.color = 'red'
             messagebox.append(message);
         }
-    }
+    };
 }
+
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+function validation() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.has-validation');
+    const email = document.getElementById('validationEmail').value;
+    const password = document.getElementById('validationPassword').value; 
+
+    // Loop over them and prevent submission
+    forms.forEach(form => {
+        if (form.value == null || form.value == "") {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+        form.classList.add('was-validated');
+      });
+
+      if (email !== null && email !== "" && password !== null && password !== "") {
+        return true
+      }
+  };
 
 function logout() {
     sessionStorage.removeItem("currentID");

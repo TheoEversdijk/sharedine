@@ -1,30 +1,21 @@
 .top-header {
-    padding-top: 10em;
+  padding-top: 10em;
 }
 
-.nav-color {
-    background: #00cfde; 
-  }
-
-  .details-image {
-    width: 100%;
-    height: 100%;
-    border-radius: 1em;
-  }
+.details-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 1em;
+}
 
 .details-info {
-    padding-left: 10em;
-    padding-top: 2em;
+  padding-left: 10em;
+  padding-top: 2em;
 }
 
 .register-button {
-    padding-top: 2em;
-}
-
-/* .description {
   padding-top: 2em;
-} 
-*/
+}
 
 .participants {
   padding-left: 10em;
