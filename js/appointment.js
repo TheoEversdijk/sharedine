@@ -129,27 +129,27 @@ async function getAppointment() {
 async function appointmentRegister() {
     const members = sessionStorage.currentID;
     const id = sessionStorage.appointmentID;
+
+    // Register memebers for appointments
     const response = await fetch(`http://127.0.0.1:3002/appointments/${id}/register?members=${members}`, {
         method: 'PUT'
     });
 
+    // Get chat entry 
+
+    // TODO: MINDER JANKY MAKEN
+    // WARNUNG AUTISM
     const chat_id = sessionStorage.appointmentID - 203; //TODO: DO THIS LIKE A SANE PERSON
 
+    // Register members for chat
     const response2 = await fetch(`${chatAPI}/${chat_id}/register?members=${members}`, {
         method: 'PUT'
     });
 
-    // chatRegister(id);
     window.location = '/pages/homeScreen.html';
     return response
 }
 
-// async function chatRegister(userID) {
-//     // Get current userID
-//     // Get chatID
-//     // 
-
-// }
 
 function StoreID(id) {
     sessionStorage.setItem("appointmentID", id);
@@ -176,13 +176,10 @@ async function addAppointment() {
             method: 'POST'
         });
 
-        // id ophalen van appointment om hieronder te gebruiken voor 'appointment_id' column
-        const idResponse = await fetch(`http://127.0.0.1:3002/appointments/getid?owner_id=${owner_id}&name=${meal}&date=${date}`, {
-            method: 'GET'
-        });
-        console.log(idResponse);
+        let appointment_id = await response.json();
+        console.log(appointment_id);
 
-        const response2 = await fetch(`${chatAPI}?owner_id=${owner_id}&createdat=${today}&meal=${meal}`, {
+        const response2 = await fetch(`${chatAPI}?owner_id=${owner_id}&appointment_id=${appointment_id.id}&meal=${meal}`, {
             method: 'POST'
         });
 
