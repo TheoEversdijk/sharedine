@@ -23,22 +23,22 @@ async function account() {
     })
 }
 
-async function login() {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value; 
-    event.preventDefault()
-    const response = await fetch(userAPI + `/login?email=${email}&password=${password}`, {
-        method: 'GET'
-    });
-    let login = await response.json();
-    console.log(login);
-    if (login.id) {
-        sessionStorage.setItem('currentID', login.id);
-        window.location = '../pages/homeScreen.html';
-    } else {
-        console.log(login.message);
-    }
-}
+// async function login() {
+//     const email = document.getElementById('email').value;
+//     const password = document.getElementById('password').value; 
+//     event.preventDefault()
+//     const response = await fetch(userAPI + `/login?email=${email}&password=${password}`, {
+//         method: 'GET'
+//     });
+//     let login = await response.json();
+//     console.log(login);
+//     if (login.id) {
+//         sessionStorage.setItem('currentID', login.id);
+//         window.location = '../pages/homeScreen.html';
+//     } else {
+//         console.log(login.message);
+//     }
+// }
 
 function logout() {
     sessionStorage.removeItem("currentID");
