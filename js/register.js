@@ -1,7 +1,9 @@
 const userAPI = "http://127.0.0.1:3001/users";
+const mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 /**
- * Function to send an API request to the Users microservice
+ * Registering a new user
+ * @returns Response in JSON format
  * @author Jesper Bertijn
  */
 async function register() {
@@ -20,8 +22,7 @@ async function register() {
                 'email': email,
                 'password': password
             }),
-        },
-        ).then((response) => response.json());
+        }).then((response) => response.json());
 
         if (response === "The account has been created.") {
             // TODO: Send the user to a page to verify their email
@@ -33,7 +34,7 @@ async function register() {
 };
 
 /**
- * Function to validate all fields on the client side
+ * Function to validate all register fields on the client side
  * @returns Boolean
  * @author Jesper Bertijn
  * @author Kevin Wang
@@ -41,12 +42,12 @@ async function register() {
 function registerValidation() {
     // Variables needed to process
     const forms = document.querySelectorAll('.has-validation');
-    const email = document.getElementById('validationEmail').value;
-    const password = document.getElementById('validationPassword').value;
-    const mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    const email = document.getElementById('registerEmail').value;
+    const password = document.getElementById('registerPassword').value;
 
     // Apply response styling on click
     forms.forEach(form => {
+        event.preventDefault()
         form.classList.add('was-validated');
     });
 
@@ -59,6 +60,8 @@ function registerValidation() {
         && password !== ""
         && password.length >= 6
     ) {
-        return true
-    };
+        return true;
+    } return false;
 };
+
+module.exports = registerValidation;

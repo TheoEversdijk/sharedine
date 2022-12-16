@@ -21,12 +21,12 @@
             <div class="card" style="border-radius: 15px;">
               <div class="card-body p-5">
                 <h2 class="text-uppercase text-center mb-5">Create an account</h2>
-  
+
                 <form class="has-validation">
-  
+
                   <div class="form-outline mb-4">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="validationEmail" placeholder="test@gmail.com" required>
+                    <input type="email" class="form-control form-control-lg" id="registerEmail" required>
                     <div class="valid-feedback">
                       Looks good!
                     </div>
@@ -34,10 +34,11 @@
                       Please enter a valid email address.
                     </div>
                   </div>
+
                   <div class="form-outline mb-4">
                     <label for="password" class="form-label">Password</label>
                     <div class="input-group has-validation">
-                      <input type="password" class="form-control" id="validationPassword" minlength="6" required>
+                      <input type="password" class="form-control form-control-lg" id="registerPassword" minlength="6" required>
                       <div class="valid-feedback">
                         Looks good!
                       </div>
@@ -46,15 +47,18 @@
                       </div>
                     </div>
                   </div>
-  
+
                   <div class="d-flex justify-content-center">
                     <button id="register-button" type="submit"
-                      class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" onclick="register()">Register</button>
+                      class="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
+                      onclick="register()">Register</button>
                   </div>
-  
-                  <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="../../index.html"
-                      class="fw-bold text-body"><u>Login here</u></a></p>
-  
+
+                </form>
+
+                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="../../index.html"
+                    class="fw-bold text-body"><u>Login here</u></a></p>
+
               </div>
             </div>
           </div>
@@ -65,10 +69,10 @@
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-      crossorigin="anonymous"></script>
-    <script src="../../js/auth.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+  <script src="../../js/register.js"></script>
 </body>
 
 </html>
