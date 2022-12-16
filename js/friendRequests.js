@@ -7,9 +7,9 @@ async function findNewFriends() {
     if (filteredUsers.length > 0) {
         filteredUsers.forEach(user => {
             if (user.id != sessionStorage.currentID) {
-                    const userCard = document.createElement('div');
-                    userCard.innerHTML =
-                        `<div class="card col-lg-12 d-flex">
+                const userCard = document.createElement('div');
+                userCard.innerHTML =
+                    `<div class="card col-lg-12 d-flex">
                     <div class="row">
                         <div class="col-lg-2">
                             <img
@@ -29,8 +29,8 @@ async function findNewFriends() {
                     </div>
                     </div>
                 </div>`;
-                    list.append(userCard);
-                };
+                list.append(userCard);
+            };
         });
     };
 };
@@ -43,7 +43,7 @@ async function checkIfInFriendsList(users) {
             filter.push(friend.id);
         });
         friends.forEach(friend => {
-            users = users.filter( ( user ) => !filter.includes( user.id ) )
+            users = users.filter((user) => !filter.includes(user.id))
         })
     }
     return users;
@@ -74,11 +74,20 @@ async function declineRequest(id) {
     return response
 }
 
-// Still needs to be fixed
+// Unblock still needs to be fixed
 async function blockUser(id) {
     console.log("Friend Request Blocked")
     const response = await fetch(friendsAPI + `/block?id=${id}`, {
         method: 'PUT'
+    });
+    return response
+}
+
+// Unblock still needs to be fixed
+async function unBlockUser(id) {
+    console.log("Friend Request Blocked")
+    const response = await fetch(friendsAPI + `?id=${id}`, {
+        method: 'DELETE'
     });
     return response
 }

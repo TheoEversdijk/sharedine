@@ -136,15 +136,14 @@ async function appointmentRegister() {
     });
 
     // Get chat entry 
-
-    // TODO: MINDER JANKY MAKEN
-    // WARNUNG AUTISM
-    const chat_id = sessionStorage.appointmentID - 203; //TODO: DO THIS LIKE A SANE PERSON
-
-    // Register members for chat
-    const response2 = await fetch(`${chatAPI}/${chat_id}/register?members=${members}`, {
+    const chat_id = await fetch(`${chatAPI}/register?appointment_id=${id}&member=${members}`, {
         method: 'PUT'
     });
+
+    // // Register members for chat
+    // const response2 = await fetch(`${chatAPI}/${chat_id}/register?members=${members}`, {
+    //     method: 'PUT'
+    // });
 
     window.location = '/pages/homeScreen.html';
     return response

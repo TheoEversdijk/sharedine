@@ -17,10 +17,10 @@ async function getAllChats() {
           }
         })
       }
-      if (sessionStorage.currentID == data.owner_id || joined){
-      let listItem = document.createElement('div');
-      listItem.innerHTML =
-        `<btn class="no-decoration chat-button" onclick="loadChat(${data.id})">
+      if (sessionStorage.currentID == data.owner_id || joined) {
+        let listItem = document.createElement('div');
+        listItem.innerHTML =
+          `<btn class="no-decoration chat-button" onclick="loadChat(${data.id})">
                   <div class="container border py-3 row">
                     <div class="col-lg-3 center">
                       <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg" class="rounded-circle chat-img"
@@ -32,7 +32,7 @@ async function getAllChats() {
                     </div>
                   </div>
                 </btn>`
-      body.append(listItem);
+        body.append(listItem);
       }
     });
   }
