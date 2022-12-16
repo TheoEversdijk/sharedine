@@ -1,12 +1,14 @@
 const userAPI = "http://127.0.0.1:3001/users";
 
-const email = document.getElementById('validationEmail').value;
-const password = document.getElementById('validationPassword').value;
-
+/**
+ * Function to send an API request to the Users microservice
+ * @author Jesper Bertijn
+ */
 async function register() {
     if (registerValidation()) {
+        const email = document.getElementById('validationEmail').value;
+        const password = document.getElementById('validationPassword').value;
         // TODO: Show the user it is registering
-        // TODO: Disable the submit button after click
         console.log("Registering...")
         const response = await fetch(userAPI + '/register', {
             headers: {
@@ -25,33 +27,38 @@ async function register() {
             // TODO: Send the user to a page to verify their email
             window.location = '../../index.html';
         } else {
-            // TODO: Send the user the error message
             console.log(response)
         };
     };
 };
 
-async function login() {
-
-}
-
+/**
+ * Function to validate all fields on the client side
+ * @returns Boolean
+ * @author Jesper Bertijn
+ * @author Kevin Wang
+ */
 function registerValidation() {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    // Variables needed to process
     const forms = document.querySelectorAll('.has-validation');
     const email = document.getElementById('validationEmail').value;
-    const password = document.getElementById('validationPassword').value; 
+    const password = document.getElementById('validationPassword').value;
+    const mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-    // Loop over them and prevent submission
+    // Apply response styling on click
     forms.forEach(form => {
-        if (form.value == null || form.value == "") {
-          event.preventDefault()
-          event.stopPropagation()
-        }
         form.classList.add('was-validated');
-      });
+    });
 
-      if (email !== null && email !== "" && password !== null && password !== "") {
+    // Conditions to check against
+    if (
+        email !== null
+        && email !== ""
+        && email.match(mailformat) !== null
+        && password !== null
+        && password !== ""
+        && password.length >= 6
+    ) {
         return true
-      }
-
-  };
+    };
+};
