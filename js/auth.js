@@ -14,11 +14,17 @@ async function register() {
         // Place to put the server-side validation errors
         const serverDiv = document.querySelector("#serverDiv");
 
-        if(response === "The account has been created.") {
-            serverDiv.innerHTML = 
-            `<h5>${response}</h5>` +
-            `<h5>Please check your email for a confirmation link.`
-        }
+        if (response === "The account has been created.") {
+            serverDiv.innerHTML =
+                `<h5>${response}</h5>` +
+                `<h5>Please check your email for a confirmation link.`
+        } else if (response === "Unable to validate email address: invalid format" || "Password should be at least 6 characters") {
+            serverDiv.innerHTML =
+                `<h5>${response}.</h5>`
+        } else {
+            serverDiv.innerHTML =
+                `<h5>The server has run into trouble, please try again later.</h5>`
+        };
         hideLoading()
     };
 };
@@ -39,7 +45,7 @@ async function login() {
 
         // If user exists, an object is returned
         // Store said object in session storage and move to the next page
-        if (typeof (response) === 'object') {
+        if (typeof (response) === 'object' && response.length === 0) {
             sessionStorage.setItem('userData', JSON.stringify(response))
             window.location = '../pages/homeScreen.html'
 
@@ -124,9 +130,6 @@ function getFormData() {
 function displayLoading() {
     const loader = document.querySelector("#loading")
     loader.classList.add("display");
-    setTimeout(() => {
-        loader.classList.remove("display");
-    }, 5000);
 }
 
 /**
