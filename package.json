@@ -21,9 +21,5 @@
   "dependencies": {
     "bootstrap": "^5.2.3",
     "font-awesome": "^4.7.0"
-  },
-  "devDependencies": {
-    "jest": "^29.3.1",
-    "jest-environment-jsdom": "^29.3.1"
   }
 }
