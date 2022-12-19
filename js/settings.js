@@ -31,12 +31,16 @@ async function uploadImage(event) {
   const avatarFile = event.target.files;
   console.log(sessionStorage.userData.user.id);
   const response = await fetch(userAPI + `/changeImg`, {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
     method: 'PUT',
-    body: {
-      id: sessionStorage.userData.user.id,
-      image: avatarFile,
-    }
-  });
+    body: JSON.stringify({
+      'id': sessionStorage.userData.user.id,
+      'image': avatarFile
+    }),
+  }).then((response) => response.json());
 }
 
 async function downloadimage() {
