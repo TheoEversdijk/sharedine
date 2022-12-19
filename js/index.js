@@ -1,5 +1,3 @@
-const userAPI = "http://127.0.0.1:3001/users";
-
 // function init() {
 //     if (sessionStorage.currentID) {
 //         window.location = '/pages/homeScreen.html';

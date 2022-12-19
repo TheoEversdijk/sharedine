@@ -1,4 +1,4 @@
-
+const userAPI = "http://127.0.0.1:3001/users";
 // async function uploadToBucket(event) {
 // 	const avatarFile = event.target.files[0]
 // 	const { data, error } = await supabase
@@ -24,4 +24,21 @@ async function testAvatar() {
   }
   console.log(avatar);
   // event.preventDefault();
+}
+
+async function uploadImage(event) {
+  event.preventDefault();
+  const avatarFile = event.target.files;
+  console.log(sessionStorage.userData.user.id);
+  const response = await fetch(userAPI + `/changeImg`, {
+    method: 'PUT',
+    body: {
+      id: sessionStorage.userData.user.id,
+      image: avatarFile,
+    }
+  });
+}
+
+async function downloadimage() {
+  const { data, error } = await supabase.storage.from('storage').download('public/avatar1.png')
 }
