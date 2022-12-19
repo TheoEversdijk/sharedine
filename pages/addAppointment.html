@@ -2,99 +2,32 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../styles/appointment.css">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShareDine</title>
+  <link rel="stylesheet" href="../../styles/appointment.css">
+  <script src="../components/header.js" type="text/javascript" defer></script>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShareDine - Add Appointment</title>
 </head>
 
 <body onload="checkLoggedIn()">
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg fixed-top nav-color">
-    <!-- Container wrapper -->
-    <div class="container">
-      <!-- Navbar brand -->
-      <a class="navbar-brand" href="/pages/homeScreen.html"><img
-        src="../../resources/images/sharedine-low-resolution-logo-black-on-transparent-background.png"
-        height="30"
-        alt=""
-        loading="lazy"
-      /></a>
-      <!-- Search form -->
-      <!-- <form class="input-group" style="width: 400px">
-        <input type="search" class="form-control" placeholder="Type query" aria-label="Search" />
-        <button class="btn btn-dark" type="button" data-mdb-ripple-color="dark" style="padding: .45rem 1.5rem .35rem;">
-          Search
-        </button>
-      </form> -->
-  
-      <!-- Toggle button -->
-      <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-        data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-        aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
-  
-      <!-- Collapsible wrapper -->
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <!-- Left links -->
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link d-flex flex-column text-center" aria-current="page" href="/pages/homeScreen.html"><i class="fas fa-home fa-lg"></i><span class="small">Home</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link d-flex flex-column text-center" aria-current="page" href="#"><i class="fas fa-user-friends fa-lg"></i><span class="small">Appointments</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link d-flex flex-column text-center" aria-current="page" href="/pages/friends.html"><i class="fas fa-briefcase fa-lg"></i><span class="small">Friends</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link d-flex flex-column text-center" aria-current="page" href="/pages/chat.html"><i class="fas fa-comment-dots fa-lg"></i><span class="small">Chats</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link d-flex flex-column text-center" aria-current="page" href="#"><i class="fas fa-bell fa-lg"></i><span class="small">Notifications</span></a>
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle d-flex align-items-center"
-              href="#"
-              id="navbarDropdownMenuLink"
-              role="button"
-              data-mdb-toggle="dropdown"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <img
-                src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg"
-                class="rounded-circle"
-                height="30"
-                alt=""
-                loading="lazy"
-              />
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="#">My profile</a></li>
-              <li><a class="dropdown-item" href="#">Settings</a></li>
-              <li><a class="dropdown-item" onclick="logout()">Logout</a></li>
-            </ul>
-          </li>
-        </ul>
-        <!-- Left links -->
-      </div>
-      <!-- Collapsible wrapper -->
-    </div>
-    <!-- Container wrapper -->
-  </nav>
   <!-- Navbar -->
+<component-header></component-header>
+<!-- Navbar -->
 
   <div class="container top-header">
+    <div class="me-auto p-2">
+      <h1>Add Appointment</h1>
+    </div>
+    <hr class="py-2">
     <div class="form-outline mb-4">
-        <label for="meal" class="form-label">Meal</label>
-        <input type="text" class="form-control" id="validationMeal" placeholder="Pizza" required>
+      <label for="meal" class="form-label">Meal</label>
+      <div class="input-group has-validation">
+        <input type="meal" class="form-control" id="validationMeal" required>
         <div class="valid-feedback">
           Looks good!
         </div>
@@ -102,77 +35,86 @@
           Please enter a meal.
         </div>
       </div>
+    </div>
+    <div class="form-outline mb-4">
+      <label for="date" class="form-label">Date</label>
+      <div class="input-group has-validation">
+        <input type="date" class="form-control" id="validationDate" placeholder="2022-12-12" required>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+        <div class="invalid-feedback">
+          Please enter a date.
+        </div>
+      </div>
       <div class="form-outline mb-4">
-        <label for="date" class="form-label">Date</label>
+        <label for="time" class="form-label">Time</label>
         <div class="input-group has-validation">
-          <input type="date" class="form-control" id="validationDate" placeholder="2022-12-12" required>
+          <input type="time" class="form-control" id="validationTime" placeholder="16:00:00" required>
           <div class="valid-feedback">
             Looks good!
           </div>
           <div class="invalid-feedback">
-            Please enter a date.
+            Please enter a time.
           </div>
-        </div>
-        <div class="form-outline mb-4">
-            <label for="time" class="form-label">Time</label>
-            <div class="input-group has-validation">
-              <input type="time" class="form-control" id="validationTime" placeholder="16:00:00" required>
-              <div class="valid-feedback">
-                Looks good!
-              </div>
-              <div class="invalid-feedback">
-                Please enter a time.
-              </div>
-            </div>
-        </div>
-        <div class="form-outline mb-4">
-          <label for="location" class="form-label">Location</label>
-          <div class="input-group has-validation">
-            <input type="location" class="form-control" id="validationLocation" placeholder="Middelburg" required>
-            <div class="valid-feedback">
-              Looks good!
-            </div>
-            <div class="invalid-feedback">
-              Please enter a location.
-            </div>
-          </div>
-        </div>
-        <div class="form-outline mb-4">
-          <label for="price" class="form-label">Price</label>
-          <div class="input-group has-validation">
-            <input type="price" class="form-control" id="validationPrice" placeholder="3.00" required>
-            <div class="valid-feedback">
-              Looks good!
-            </div>
-            <div class="invalid-feedback">
-              Please enter a price.
-            </div>
-          </div>
-        </div>
-        <div class="form-outline mb-4">
-            <label for="info" class="form-label">Information</label>
-            <div class="input-group has-validation">
-              <input type="information" class="form-control" id="validationInfo" required>
-              <div class="valid-feedback">
-                Looks good!
-              </div>
-              <div class="invalid-feedback">
-                Please enter information.
-              </div>
-            </div>
         </div>
       </div>
+      <div class="form-outline mb-4">
+        <label for="location" class="form-label">Location</label>
+        <div class="input-group has-validation">
+          <input type="location" class="form-control" id="validationLocation" required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+          <div class="invalid-feedback">
+            Please enter a location.
+          </div>
+        </div>
+      </div>
+      <div class="form-outline mb-4">
+        <label for="price" class="form-label">Price</label>
+        <div class="input-group has-validation">
+          <input type="price" class="form-control" id="validationPrice" placeholder="Only use . (dot) , (comma) is not supported" required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+          <div class="invalid-feedback">
+            Please enter a price.
+          </div>
+        </div>
+      </div>
+      <div class="form-outline mb-4">
+        <label for="info" class="form-label">Information</label>
 
-      <button type="submit" class="btn btn-primary" onclick="addAppointment()">Create Appointment</button>
+        <span class="tt" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-html="true" title="Insert any additional information for the meal.
+For example: is your meal vegan-friendly? Do you want members to bring something with them for the meal?">
+          <i class="fa fa-question-circle-o"></i>
+        </span>
 
+        <div class="input-group has-validation">
+          <input type="information" class="form-control" id="validationInfo" required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+          <div class="invalid-feedback">
+            Please enter information.
+          </div>
+        </div>
+      </div>
     </div>
+
+    <button type="submit" class="btn btn-info" onclick="addAppointment()">Create Appointment</button>
+
+  </div>
 
   </div>
 
   <!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <script src="../js/index.js"></script>
-    <script src="../js/appointment.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+  <script src="../js/index.js"></script>
+  <script src="../js/appointment.js"></script>
 </body>
 
 </html>

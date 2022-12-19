@@ -1,101 +1,77 @@
-(function(){
-  
-    var chat = {
-      messageToSend: '',
-      messageResponses: [
-        'Why did the web developer leave the restaurant? Because of the table layout.',
-        'How do you comfort a JavaScript bug? You console it.',
-        'An SQL query enters a bar, approaches two tables and asks: "May I join you?"',
-        'What is the most used language in programming? Profanity.',
-        'What is the object-oriented way to become wealthy? Inheritance.',
-        'An SEO expert walks into a bar, bars, pub, tavern, public house, Irish pub, drinks, beer, alcohol'
-      ],
-      init: function() {
-        this.cacheDOM();
-        this.bindEvents();
-        this.render();
-      },
-      cacheDOM: function() {
-        this.$chatHistory = $('.chat-history');
-        this.$button = $('button');
-        this.$textarea = $('#message-to-send');
-        this.$chatHistoryList =  this.$chatHistory.find('ul');
-      },
-      bindEvents: function() {
-        this.$button.on('click', this.addMessage.bind(this));
-        this.$textarea.on('keyup', this.addMessageEnter.bind(this));
-      },
-      render: function() {
-        this.scrollToBottom();
-        if (this.messageToSend.trim() !== '') {
-          var template = Handlebars.compile( $("#message-template").html());
-          var context = { 
-            messageOutput: this.messageToSend,
-            time: this.getCurrentTime()
-          };
-  
-          this.$chatHistoryList.append(template(context));
-          this.scrollToBottom();
-          this.$textarea.val('');
-          
-          // responses
-          var templateResponse = Handlebars.compile( $("#message-response-template").html());
-          var contextResponse = { 
-            response: this.getRandomItem(this.messageResponses),
-            time: this.getCurrentTime()
-          };
-          
-          setTimeout(function() {
-            this.$chatHistoryList.append(templateResponse(contextResponse));
-            this.scrollToBottom();
-          }.bind(this), 1500);
-          
-        }
-        
-      },
-      
-      addMessage: function() {
-        this.messageToSend = this.$textarea.val()
-        this.render();         
-      },
-      addMessageEnter: function(event) {
-          // enter was pressed
-          if (event.keyCode === 13) {
-            this.addMessage();
+const chatAPI = "http://127.0.0.1:3004/chat";
+
+async function getAllChats() {
+  const response = await fetch(chatAPI);
+
+  //store data in json
+  let data = await response.json();
+  const body = document.getElementById('chats-list')
+  if (response) {
+    data.forEach(data => {
+      let members = data.members;
+      let joined = false;
+      if (members !== null) {
+        members.forEach(member => {
+          if (member === Number(sessionStorage.currentID)) {
+            joined = true;
           }
-      },
-      scrollToBottom: function() {
-         this.$chatHistory.scrollTop(this.$chatHistory[0].scrollHeight);
-      },
-      getCurrentTime: function() {
-        return new Date().toLocaleTimeString().
-                replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
-      },
-      getRandomItem: function(arr) {
-        return arr[Math.floor(Math.random()*arr.length)];
+        })
       }
-      
-    };
-    
-    chat.init();
-    
-    var searchFilter = {
-      options: { valueNames: ['name'] },
-      init: function() {
-        var userList = new List('people-list', this.options);
-        var noItems = $('<li id="no-items-found">No items found</li>');
-        
-        userList.on('updated', function(list) {
-          if (list.matchingItems.length === 0) {
-            $(list.list).append(noItems);
-          } else {
-            noItems.detach();
-          }
-        });
+      if (sessionStorage.currentID == data.owner_id || joined) {
+        let listItem = document.createElement('div');
+        listItem.innerHTML =
+          `<btn class="no-decoration chat-button" onclick="loadChat(${data.id})">
+                  <div class="container border py-3 row">
+                    <div class="col-lg-3 center">
+                      <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg" class="rounded-circle chat-img"
+                      alt="" loading="lazy" />
+                   </div>
+                    <div class="col-lg-9">
+                      <p>${data.name}</p>
+                      <small>Created on ${data.created_at}</small>
+                    </div>
+                  </div>
+                </btn>`
+        body.append(listItem);
       }
-    };
-    
-    searchFilter.init();
-    
-  })();
-  
+    });
+  }
+}
+
+async function removeChat() {
+  event.preventDefault();
+  const response = await fetch(`${chatAPI}?chat_id=${id}`, {
+    method: 'DELETE'
+  });
+  window.location = '/pages/chat.html';
+
+  return response
+}
+
+function loadChat(id) {
+  const chatscreen = document.getElementById('chatroom-content');
+  chatscreen.innerHTML = `<iframe src="http://127.0.0.1:5500/pages/chatroom.html?chat_id=${id}" height="450px" class="col-lg-12 border" id="chatroom"></iframe>`
+}
+
+async function getChat() {
+  const queryParams = new URLSearchParams(window.location.search);
+  const chat_id = queryParams.get('chat_id');
+  // console.log(chat_id)
+  const response = await fetch(`http://127.0.0.1:3004/chat/${chat_id}`);
+
+  //store data in json
+  let data = await response.json();
+  // console.log(data)
+  const body = document.getElementById('messages')
+  if (response) {
+    data.forEach(data => {
+      let listItem = document.createElement('div');
+      listItem.innerHTML =
+        `<div class="card">
+              <p>Owner ID: ${data.owner_id}</p>
+              <p>${data.message}</p>
+              <small><p>Created at: ${data.created_at}</p></small>`
+      body.append(listItem);
+    });
+  }
+}

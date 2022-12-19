@@ -1,7 +1,26 @@
 .top-header {
-    padding-top: 15em;
+  padding-top: 10em;
 }
 
-.nav-color {
-    background: #00cfde; 
-  }
+.friend-image {
+  width: 8em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.friend-button {
+  margin-right: 1em;
+  margin-left: 1em;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.center-text {
+  display: block;
+  margin-top: auto;
+  margin-bottom: auto;
+}

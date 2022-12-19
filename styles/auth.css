@@ -2,12 +2,7 @@
     background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('../resources/images/Foodsel.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    width: 100%; 
-    height: auto;
-    overflow: auto;
+    height: 100vh;
 }
 
 .gradient-custom-3 {
@@ -20,6 +15,7 @@
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
     }
+
     .gradient-custom-4 {
     /* fallback for old browsers */
     background: #84fab0;
@@ -30,3 +26,11 @@
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
     }
+
+.login-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    padding-bottom: 2em;
+  }
