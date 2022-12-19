@@ -52,8 +52,23 @@
   animation: spin 1s infinite linear;
 }
 
-#loader.display {
-  visibility: visible;
+/* Button */
+.displayButton {
+  visibility: hidden;
+}
+
+/* Loader */
+.displayLoader {
+  visibility: visible !important;
+}
+
+.container-row {
+  display: grid;
+}
+
+.layer1, .layer2 {
+  grid-column: 1;
+  grid-row: 1;
 }
 
 @keyframes spin {
