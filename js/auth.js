@@ -42,6 +42,7 @@ async function login() {
 
     // Place to put the server-side validation errors
     const serverDiv = document.querySelector("#serverDiv");
+    console.log(JSON.stringify(response))
 
     // If user exists, an object is returned
     // Store said object in session storage and move to the next page
@@ -128,7 +129,7 @@ function getFormData() {
  * Function to display the loading circle
  */
 function displayLoading() {
-  const loader = document.querySelector("#loading")
+  const loader = document.querySelector("#loader")
   loader.classList.add("display");
 }
 
@@ -136,6 +137,6 @@ function displayLoading() {
  * Function to hide the loading circle
  */
 function hideLoading() {
-  const loader = document.querySelector("#loading")
+  const loader = document.querySelector("#loader")
   loader.classList.remove("display")
 }
