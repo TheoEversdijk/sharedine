@@ -2,66 +2,30 @@
     background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('../resources/images/Foodsel.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    width: 100%; 
-    height: auto;
-    overflow: auto;
-}
-
-#serverDiv h5 {
-    text-align: center;
-    color: red;
-    margin-bottom: 1rem;
-}
-
-#loading {
-    width: 2rem;
-    height: 2rem;
-    border: 5px solid #6d6d6d;
-    border-top: 6px solid #84fab0;
-    border-radius: 100%;
-    margin: auto;
-    visibility: hidden;
-    animation: spin 1s infinite linear;
-    margin-top: 0.65rem;
-}
-
-#loading.display {
-    visibility: visible;
-}
-
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+    height: 100vh;
 }
 
 .gradient-custom-3 {
     /* fallback for old browsers */
     background: #84fab0;
-
+    
     /* Chrome 10-25, Safari 5.1-6 */
     background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
-
+    
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
-}
+    }
 
-.gradient-custom-4 {
+    .gradient-custom-4 {
     /* fallback for old browsers */
     background: #84fab0;
-
+    
     /* Chrome 10-25, Safari 5.1-6 */
     background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
-
+    
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
-}
+    }
 
 .login-img {
     display: block;
@@ -69,4 +33,4 @@
     margin-right: auto;
     width: 50%;
     padding-bottom: 2em;
-}
+  }
