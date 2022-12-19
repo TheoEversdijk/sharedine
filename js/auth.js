@@ -18,7 +18,7 @@ async function register() {
       serverDiv.innerHTML =
         `<h5>${response}</h5>` +
         `<h5>Please check your email for a confirmation link.`
-    } else if (response === "Unable to validate email address: invalid format" || "Password should be at least 6 characters") {
+    } else if ((response === "Unable to validate email address: invalid format") || (response === "Password should be at least 6 characters")) {
       serverDiv.innerHTML =
         `<h5>${response}.</h5>`
     } else {
@@ -125,17 +125,21 @@ function getFormData() {
 };
 
 /**
- * Function to display the loading circle
+ * Function to display the loading circle and remove the button
  */
 function displayLoading() {
-  const loader = document.querySelector("#loader")
-  loader.classList.add("display");
+  const loader = document.querySelector("#loader");
+  const fetchButton = document.querySelector("#fetchButton");
+  loader.classList.add("displayLoader");
+  fetchButton.classList.add("displayButton");
 }
 
 /**
- * Function to hide the loading circle
+ * Function to hide the loading circle and return the button
  */
 function hideLoading() {
-  const loader = document.querySelector("#loader")
-  loader.classList.remove("display")
+  const loader = document.querySelector("#loader");
+  const fetchButton = document.querySelector("#fetchButton");
+  loader.classList.remove("displayLoader");
+  fetchButton.classList.remove("displayButton");
 }
