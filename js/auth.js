@@ -45,7 +45,7 @@ async function login() {
 
         // If user exists, an object is returned
         // Store said object in session storage and move to the next page
-        if (typeof (response) === 'object' && response.length === 0) {
+        if (typeof (response) === 'object' && response.length !== 0) {
             sessionStorage.setItem('userData', JSON.stringify(response))
             window.location = '../pages/homeScreen.html'
 

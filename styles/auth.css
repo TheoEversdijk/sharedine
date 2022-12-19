@@ -25,7 +25,7 @@
     margin: auto;
     visibility: hidden;
     animation: spin 1s infinite linear;
-    margin-top: 1rem;
+    margin-top: 0.65rem;
 }
 
 #loading.display {
