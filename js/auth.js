@@ -42,7 +42,6 @@ async function login() {
 
     // Place to put the server-side validation errors
     const serverDiv = document.querySelector("#serverDiv");
-    console.log(JSON.stringify(response))
 
     // If user exists, an object is returned
     // Store said object in session storage and move to the next page
