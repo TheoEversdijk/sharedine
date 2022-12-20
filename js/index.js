@@ -8,6 +8,7 @@
  * Verify that the user is logged in
  */
 function checkLoggedIn() {
+    console.log(sessionStorage.userData)
     if (!sessionStorage.userData) {
         window.location = '/index.html';
     }

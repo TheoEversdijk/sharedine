@@ -140,6 +140,8 @@ async function appointmentRegister() {
         method: 'PUT'
     });
 
+    getRegistrationEmail();
+
     // // Register members for chat
     // const response2 = await fetch(`${chatAPI}/${chat_id}/register?members=${members}`, {
     //     method: 'PUT'

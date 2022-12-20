@@ -37,7 +37,7 @@
         <div class="col-lg-6" id="right-side">
           <form id="upload" class="form-control">
             <label for="file">File to upload</label>
-            <input type="file" id="file" accept="image/*">
+            <input type="file" onchange="encodeImageFileAsURL(this)" id="file" accept="image/*">
               <script src="../js/settings.js"></script>
             <button class="btn btn-info" onclick="uploadImage(event)">Upload</button>
           </form>

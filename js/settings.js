@@ -1,4 +1,6 @@
 const userAPI = "http://127.0.0.1:3001/users";
+
+// const base64 = require('base-64');
 // async function uploadToBucket(event) {
 // 	const avatarFile = event.target.files[0]
 // 	const { data, error } = await supabase
@@ -11,38 +13,44 @@ const userAPI = "http://127.0.0.1:3001/users";
 
 // };
 
-async function testAvatar() {
-  if (validation()) {
-    const avatar = document.getElementById('avatar').value;
-    const response = await fetch(userAPI + `/settings?avatar=${avatar}`, {
-      method: 'POST'
-    });
-
-    window.location = '../../index.html';
-
-    return response
+/**
+ * Encrypt an image to Base64
+ */
+let encryptedImage = ""
+function encodeImageFileAsURL(element) {
+  let file = element.files[0];
+  let reader = new FileReader();
+  reader.onloadend = function() {
+    // console.log('RESULT', reader.result)
+    encryptedImage = (reader.result)
   }
-  console.log(avatar);
-  // event.preventDefault();
+  reader.readAsDataURL(file);
 }
 
 async function uploadImage(event) {
+  const avatarFile = document.getElementById("file").files[0];
   event.preventDefault();
-  const avatarFile = event.target.files;
-  console.log(sessionStorage.userData.user.id);
+  console.log(encryptedImage)
+
+  // Retrieve items from session storage
+  const userData = sessionStorage.getItem('userData');
+  const userObject = JSON.parse(userData);
+  const user_id = userObject.user.id;
+  //   console.log(userObject.user.id)
+
   const response = await fetch(userAPI + `/changeImg`, {
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
-    method: 'PUT',
+    method: 'POST',
     body: JSON.stringify({
-      'id': sessionStorage.userData.user.id,
-      'image': avatarFile
+      // 'id': JSON.stringify(user_id),
+      'image': encryptedImage
     }),
   }).then((response) => response.json());
 }
 
 async function downloadimage() {
-  const { data, error } = await supabase.storage.from('storage').download('public/avatar1.png')
+  const { data, error } = await supabase.storage.from('storage').download('public/img.png');
 }
