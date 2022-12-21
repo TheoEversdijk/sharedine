@@ -80,7 +80,3 @@
     transform: rotate(360deg);
   }
 }
-/* both supported */
-:root {
-  color-scheme: light dark;
-}
