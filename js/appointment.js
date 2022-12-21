@@ -2,7 +2,16 @@ const appointmentAPI = "http://127.0.0.1:3002/appointments";
 const chatAPI = "http://127.0.0.1:3004/chat";
 
 async function getPersonalAppointments() {
-    const response = await fetch(appointmentAPI);
+    const userData = sessionStorage.getItem('userData');
+    const userObject = JSON.parse(userData);
+    const user_id = userObject.user.id;
+    const response = await fetch(appointmentAPI + `/${user_id}`, {
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        method: 'GET',
+    });
 
     //store data in json
     let data = await response.json();
@@ -12,25 +21,13 @@ async function getPersonalAppointments() {
     if (response) {
         if (data.length != 0) {
             data.forEach(data => {
-                let members = data.members;
-                let joined = false;
+                // TODO: make this less janky
+                appointmentsStatus.textContent = "You have the following appointments scheduled:";
+                noContent.innerHTML = "";
 
-                if (members !== null) {
-                    members.forEach(member => {
-                        if (member === Number(sessionStorage.currentID)) {
-                            joined = true;
-                        }
-                    })
-                }
-                if (sessionStorage.currentID == data.owner_id || joined) {
-
-                    // TODO: make this less janky
-                    appointmentsStatus.textContent = "You have the following appointments scheduled:";
-                    noContent.innerHTML = "";
-
-                    let listItem = document.createElement('div');
-                    listItem.innerHTML =
-                        `<a href="/pages/appointmentDetails.html" onclick="StoreID(${data.id})" class="no-decoration">
+                let listItem = document.createElement('div');
+                listItem.innerHTML =
+                    `<a href="/pages/appointmentDetails.html" onclick="StoreID(${data.id})" class="no-decoration">
                     <div class="card mb-3">
                         <div class="card-body">
                             <h5 class="card-title">${data.name}</h5>
@@ -41,14 +38,16 @@ async function getPersonalAppointments() {
                         </div>
                     </div>
                 </a>`
-                    body.append(listItem);
-                }
+                body.append(listItem);
             });
         }
     }
 }
 
 async function getAllAppointments() {
+    const userData = sessionStorage.getItem('userData');
+    const userObject = JSON.parse(userData);
+    const user_id = userObject.user.id;
     const response = await fetch(appointmentAPI);
 
     //store data in json
@@ -56,20 +55,23 @@ async function getAllAppointments() {
     const body = document.getElementById('items')
     if (response) {
         data.forEach(data => {
-            let listItem = document.createElement('div');
-            listItem.innerHTML =
-                `<a href="/pages/appointmentDetails.html" onclick="StoreID(${data.id})" class="no-decoration">
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <h5 class="card-title">${data.name}</h5>
-                                    <p class="card-text">Date: ${data.date}</p>
-                                    <p class="card-text">Location: ${data.location}</p>
-                                    <p class="card-text">Price per portion: €${data.price}</p>
-                                    <p class="card-text"><small class="text-muted">Time: ${data.time}</small></p>
+            console.log(data);
+            if (data.owner_id !== user_id && !data.members.includes(user_id)) {
+                let listItem = document.createElement('div');
+                listItem.innerHTML =
+                    `<a href="/pages/appointmentDetails.html" onclick="StoreID(${data.id})" class="no-decoration">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">${data.name}</h5>
+                                        <p class="card-text">Date: ${data.date}</p>
+                                        <p class="card-text">Location: ${data.location}</p>
+                                        <p class="card-text">Price per portion: €${data.price}</p>
+                                        <p class="card-text"><small class="text-muted">Time: ${data.time}</small></p>
+                                </div>
                             </div>
-                        </div>
-                    </a>`
-            body.append(listItem);
+                        </a>`
+                body.append(listItem);
+            }
         });
     }
 }
@@ -127,25 +129,36 @@ async function getAppointment() {
 
 // Register for an appointment
 async function appointmentRegister() {
-    const members = sessionStorage.currentID;
+    const userData = sessionStorage.getItem('userData');
+    const userObject = JSON.parse(userData);
+    const user_id = userObject.user.id;
     const id = sessionStorage.appointmentID;
 
     // Register memebers for appointments
-    const response = await fetch(`http://127.0.0.1:3002/appointments/${id}/register?members=${members}`, {
-        method: 'PUT'
+    const response = await fetch(appointmentAPI + `/${id}/register`, {
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        method: 'PUT',
+        body: JSON.stringify({
+            'member': user_id,
+        }),
     });
 
     // Get chat entry 
-    const chat_id = await fetch(`${chatAPI}/register?appointment_id=${id}&member=${members}`, {
-        method: 'PUT'
+    await fetch(chatAPI + "/register", {
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        method: 'PUT',
+        body: JSON.stringify({
+            'appointment_id': id,
+            'member': user_id,
+        }),
     });
-
     getRegistrationEmail();
-
-    // // Register members for chat
-    // const response2 = await fetch(`${chatAPI}/${chat_id}/register?members=${members}`, {
-    //     method: 'PUT'
-    // });
 
     window.location = '/pages/homeScreen.html';
     return response
@@ -162,7 +175,9 @@ function wipeID() {
 
 async function addAppointment() {
     if (validation()) {
-        const owner_id = sessionStorage.currentID;
+        const userData = sessionStorage.getItem('userData');
+        const userObject = JSON.parse(userData);
+        const owner_id = userObject.user.id;
         const meal = document.getElementById('validationMeal').value;
         const date = document.getElementById('validationDate').value;
         const time = document.getElementById('validationTime').value;
@@ -170,47 +185,45 @@ async function addAppointment() {
         const price = document.getElementById('validationPrice').value;
         const info = document.getElementById('validationInfo').value;
 
-        const today = new Date().toISOString().slice(0, 10)
-
         event.preventDefault();
-        const response = await fetch(`http://127.0.0.1:3002/appointments?owner_id=${owner_id}&name=${meal}&date=${date}&time=${time}&location=${location}&price=${price}&info=${info}`, {
-            method: 'POST'
+
+        const response = await fetch(appointmentAPI, {
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify({
+                'owner_id': owner_id,
+                'name': meal,
+                'date': date,
+                'time': time,
+                'location': location,
+                'price': price,
+                'info': info
+            }),
         });
 
         let appointment_id = await response.json();
         console.log(appointment_id);
 
-        const response2 = await fetch(`${chatAPI}?owner_id=${owner_id}&appointment_id=${appointment_id.id}&meal=${meal}`, {
-            method: 'POST'
-        });
+        const response2 = await fetch(chatAPI, {
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify({
+                'owner_id': owner_id,
+                'appointment_id': appointment_id.id,
+                'meal': meal,
+            }),
+        }).then((response) => response.json('Chat Created'));
 
         window.location = '/pages/homeScreen.html';
 
         return response
     }
-}
-
-async function fetchOldAppointmentData() {
-    const meal = document.getElementById('validationMeal');
-    const date = document.getElementById('validationDate');
-    const time = document.getElementById('validationTime');
-    const location = document.getElementById('validationLocation');
-    const price = document.getElementById('validationPrice');
-    const info = document.getElementById('validationInfo');
-    const response = await fetch(appointmentAPI);
-    let data = await response.json();
-    if (response) {
-        data.forEach(data => {
-            if (sessionStorage.appointmentID == data.id) {
-                meal.value = data.name;
-                date.value = data.date;
-                time.value = data.time;
-                location.value = data.location;
-                price.value = data.price;
-                info.value = data.information;
-            }
-        })
-    };
 }
 
 async function editAppointment() {

@@ -1,6 +1,10 @@
 const chatAPI = "http://127.0.0.1:3004/chat";
 
 async function getAllChats() {
+  const userData = sessionStorage.getItem('userData');
+  const userObject = JSON.parse(userData);
+  const user_id = userObject.user.id;
+  
   const response = await fetch(chatAPI);
 
   //store data in json
@@ -8,16 +12,7 @@ async function getAllChats() {
   const body = document.getElementById('chats-list')
   if (response) {
     data.forEach(data => {
-      let members = data.members;
-      let joined = false;
-      if (members !== null) {
-        members.forEach(member => {
-          if (member === Number(sessionStorage.currentID)) {
-            joined = true;
-          }
-        })
-      }
-      if (sessionStorage.currentID == data.owner_id || joined) {
+      if (user_id == data.owner_id || data.members.includes(user_id)) {
         let listItem = document.createElement('div');
         listItem.innerHTML =
           `<btn class="no-decoration chat-button" onclick="loadChat(${data.id})">

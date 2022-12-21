@@ -1,8 +1,3 @@
-// function init() {
-//     if (sessionStorage.currentID) {
-//         window.location = '/pages/homeScreen.html';
-//     }
-// }
 
 /**
  * Verify that the user is logged in
@@ -14,16 +9,13 @@ function checkLoggedIn() {
     }
 }
 
-// async function account() {
-//     const response = await fetch(userAPI);
-//     let data = await response.json();
-//     let accounts = data.data;
-//     accounts.forEach(account => {
-//         if (account.id == sessionStorage.currentID) {
-//             document.getElementById('welcome').innerText = `Welcome ${account.name}`;
-//         }
-//     })
-// }
+async function account() {
+    const userData = sessionStorage.getItem('userData');
+    const userObject = JSON.parse(userData);
+    const user_id = userObject.user.id;
+    const response = await searchUser(user_id);
+    document.getElementById('welcome').innerText = `Welcome ${response.username}`;
+}
 
 /**
  * Removes user data from the session storage
