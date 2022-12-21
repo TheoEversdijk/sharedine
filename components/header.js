@@ -73,12 +73,12 @@ class Header extends HTMLElement {
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <li><a class="dropdown-item" href="#">My profile</a></li>
                 <li><a class="dropdown-item" href="/pages/settings.html">Settings</a></li>
-                <li> 
+                <li><a class=dropdown-item href="#"> 
                   <dark-mode-toggle
                     id="dark-mode-toggle"
                     appearance="toggle">
                   </dark-mode-toggle>
-                <li/>
+                <a/><li/>
                 <li><a class="dropdown-item" onclick="logout()">Logout</a></li>
               </ul>
             </li>
