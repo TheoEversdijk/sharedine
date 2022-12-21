@@ -115,12 +115,13 @@ For example: is your meal vegan-friendly? Do you want members to bring something
     crossorigin="anonymous"></script>
   <script src="../js/index.js"></script>
   <script src="../js/appointment.js"></script>
-  <script>
-    function addDarkmodeWidget() {
-      new Darkmode().showWidget();
-    }
-    window.addEventListener('load', addDarkmodeWidget);
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<script>
+  function addDarkmodeWidget() {
+    new Darkmode().showWidget();
+  }
+  window.addEventListener('load', addDarkmodeWidget);
+</script>
 </body>
 
 </html>
