@@ -1,9 +1,10 @@
 const notificationAPI = "http://127.0.0.1:3005";
 
-async function getRegistrationEmail() {
-    const response = await fetch(`${notificationAPI}/register`, {
-        method: 'GET'
-      });
+async function getRegistrationEmail(email) {
+  // console.log(email);
+    const response = await fetch(`${notificationAPI}/register?email=${email}`, {
+      method: 'GET',
+  });
     return response;
 }
 

@@ -79,6 +79,9 @@ async function getAllAppointments() {
 async function getAppointment() {
     const response = await fetch(appointmentAPI);
     //store data in json
+    const userData = sessionStorage.getItem('userData');
+    const userObject = JSON.parse(userData);
+    const user_id = userObject.user.id;
     let data = await response.json();
     const appointmentName = document.getElementById('appointment-name')
     const body = document.getElementById('information')
@@ -86,6 +89,9 @@ async function getAppointment() {
         data.forEach(data => {
             if (sessionStorage.appointmentID == data.id) {
                 let listItem = document.createElement('div');
+                let listItem2 = document.createElement('div');
+                let listItem3 = document.createElement('div');
+                let listItem4 = document.createElement('div');
                 let title = document.createElement('h1');
                 title.textContent = `${data.name}`;
 
@@ -101,10 +107,24 @@ async function getAppointment() {
             <p>Date: ${data.date}</p>
             <p>Time: ${data.time}</p>
             <p>Price: €${data.price}</p>
-            <div class="register-button">
+            </div>`
+
+            if (data.owner_id !== user_id && !data.members.includes(user_id)) {
+            listItem2.innerHTML =
+            `<div class="register-button">
                 <a href="#"><button type="button" class="btn btn-info" onclick="appointmentRegister()">Register</button></a>
-              </div>
-            </div>
+              </div>`
+            }
+
+            if (data.owner_id == user_id) {
+                listItem4.innerHTML = `
+                <div class="p-2">
+                <a class="btn btn-info" href="/pages/editAppointment.html">Edit</a>
+              </div>`
+            }
+
+              listItem3.innerHTML =
+            `
     </div>
     <div class="row content-row-2">
       <div class="col-lg-6 col-md-6 description">
@@ -121,7 +141,9 @@ async function getAppointment() {
   </div>
                 `;
                 appointmentName.append(title);
-                body.append(listItem);
+                body.append(listItem, listItem3);
+                document.getElementById('info').appendChild(listItem2);
+                document.getElementById('header-edit').appendChild(listItem4);
             }
         });
     }
@@ -132,6 +154,7 @@ async function appointmentRegister() {
     const userData = sessionStorage.getItem('userData');
     const userObject = JSON.parse(userData);
     const user_id = userObject.user.id;
+    const user_email = userObject.user.email;
     const id = sessionStorage.appointmentID;
 
     // Register memebers for appointments
@@ -158,7 +181,9 @@ async function appointmentRegister() {
             'member': user_id,
         }),
     });
-    getRegistrationEmail();
+
+    console.log(getRegistrationEmail(user_email))
+    
 
     window.location = '/pages/homeScreen.html';
     return response
