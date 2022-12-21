@@ -181,6 +181,7 @@ async function addAppointment() {
         const meal = document.getElementById('validationMeal').value;
         const date = document.getElementById('validationDate').value;
         const time = document.getElementById('validationTime').value;
+        // const limit = document.getElementById('validationLimit').value;
         const location = document.getElementById('validationLocation').value;
         const price = document.getElementById('validationPrice').value;
         const info = document.getElementById('validationInfo').value;
@@ -198,6 +199,7 @@ async function addAppointment() {
                 'name': meal,
                 'date': date,
                 'time': time,
+                // 'limit': limit,
                 'location': location,
                 'price': price,
                 'info': info
@@ -233,19 +235,43 @@ async function editAppointment() {
         const meal = document.getElementById('validationMeal').value;
         const date = document.getElementById('validationDate').value;
         const time = document.getElementById('validationTime').value;
+        // const limit = document.getElementById('validationLimit').value;
         const location = document.getElementById('validationLocation').value;
         const price = document.getElementById('validationPrice').value;
         const info = document.getElementById('validationInfo').value;
         event.preventDefault();
-        const response = await fetch(`http://127.0.0.1:3002/appointments/${id}?&name=${meal}&date=${date}&time=${time}&location=${location}&price=${price}&info=${info}`, {
-            method: 'PUT'
+        const response = await fetch(appointmentAPI + `/${id}`, {
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'PUT',
+            body: JSON.stringify({
+                'owner_id': owner_id,
+                'name': meal,
+                'date': date,
+                'time': time,
+                'limit': limit,
+                'location': location,
+                'price': price,
+                'info': info
+            }),
         });
 
-        const chat_id = sessionStorage.appointmentID - 203; //TODO: DO THIS LIKE A SANE PERSON
+        // const chat_id = sessionStorage.appointmentID - 203; //TODO: DO THIS LIKE A SANE PERSON
 
-        const response2 = await fetch(`${chatAPI}?chat_id=${chat_id}&meal=${meal}`, {
-            method: 'PUT'
-        });
+        // const response2 = await fetch(`${chatAPI}?chat_id=${chat_id}&meal=${meal}`, {
+        //     headers: {
+        //         Accept: 'application/json',
+        //         'Content-Type': 'application/json'
+        //     },
+        //     method: 'PUT',
+        //     body: JSON.stringify({
+        //         'owner_id': owner_id,
+        //         'appointment_id': appointment_id.id,
+        //         'meal': meal,
+        //     }),
+        // });
 
         window.location = '/pages/homeScreen.html';
 
@@ -279,6 +305,7 @@ function validation() {
     const meal = document.getElementById('validationMeal').value;
     const date = document.getElementById('validationDate').value;
     const time = document.getElementById('validationTime').value;
+    // const limit = document.getElementById('validationLimit').value;
     const location = document.getElementById('validationLocation').value;
     const price = document.getElementById('validationPrice').value;
     const info = document.getElementById('validationInfo').value;

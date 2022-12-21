@@ -1,12 +1,14 @@
 async function findNewFriends() {
+    const userData = sessionStorage.getItem('userData');
+    const userObject = JSON.parse(userData);
+    const user_id = userObject.user.id;
     const response = await fetch(userAPI);
-    let data = await response.json();
-    let users = data.data;
+    let users = await response.json();
     const filteredUsers = await checkIfInFriendsList(users);
     const list = document.getElementById('users-list');
     if (filteredUsers.length > 0) {
         filteredUsers.forEach(user => {
-            if (user.id != sessionStorage.currentID) {
+            if (user.id != user_id) {
                 const userCard = document.createElement('div');
                 userCard.innerHTML =
                     `<div class="card col-lg-12 d-flex">
@@ -50,26 +52,51 @@ async function checkIfInFriendsList(users) {
 }
 
 async function sendFriendRequest(id) {
-    const from = sessionStorage.currentID;
+    const userData = sessionStorage.getItem('userData');
+    const userObject = JSON.parse(userData);
+    const user_id = userObject.user.id;
+    const from = user_id;
     console.log("Friend Request Send to " + id)
-    const response = await fetch(friendsAPI + `?from=${from}&to=${id}`, {
-        method: 'POST'
+    const response = await fetch(friendsAPI + `/request`, {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify({
+          'from': from,
+          'to': id
+        }),
     });
     return response;
 }
 
 async function acceptRequest(id) {
     console.log("Friend Request Accepted")
-    const response = await fetch(friendsAPI + `?id=${id}`, {
-        method: 'PUT'
+    const response = await fetch(friendsAPI + `/request`, {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: 'PUT',
+        body: JSON.stringify({
+          'id': id
+        }),
     });
     return response
 }
 
 async function declineRequest(id) {
     console.log("Friend Request Declined")
-    const response = await fetch(friendsAPI + `?id=${id}`, {
-        method: 'DELETE'
+    const response = await fetch(friendsAPI + `/request`, {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: 'DELETE',
+        body: JSON.stringify({
+          'id': id
+        }),
     });
     return response
 }
@@ -77,8 +104,15 @@ async function declineRequest(id) {
 // Unblock still needs to be fixed
 async function blockUser(id) {
     console.log("Friend Request Blocked")
-    const response = await fetch(friendsAPI + `/block?id=${id}`, {
-        method: 'PUT'
+    const response = await fetch(friendsAPI + `/request/block`, {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: 'PUT',
+        body: JSON.stringify({
+          'id': id
+        }),
     });
     return response
 }
