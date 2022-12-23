@@ -255,7 +255,9 @@ async function addAppointment() {
 
 async function editAppointment() {
     if (validation()) {
-        // const owner_id = sessionStorage.currentID;
+        const userData = sessionStorage.getItem('userData');
+        const userObject = JSON.parse(userData);
+        const owner_id = userObject.user.id;
         const id = sessionStorage.appointmentID;
         const meal = document.getElementById('validationMeal').value;
         const date = document.getElementById('validationDate').value;
@@ -283,8 +285,6 @@ async function editAppointment() {
             }),
         });
 
-        // const chat_id = sessionStorage.appointmentID - 203; //TODO: DO THIS LIKE A SANE PERSON
-
         // const response2 = await fetch(`${chatAPI}?chat_id=${chat_id}&meal=${meal}`, {
         //     headers: {
         //         Accept: 'application/json',
@@ -311,11 +311,11 @@ async function removeAppointment() {
         method: 'DELETE'
     });
 
-    const chat_id = sessionStorage.appointmentID - 203; //TODO: DO THIS LIKE A SANE PERSON
+    // const chat_id = sessionStorage.appointmentID - 203; //TODO: DO THIS LIKE A SANE PERSON
 
-    const response2 = await fetch(`${chatAPI}?chat_id=${chat_id}`, {
-        method: 'DELETE'
-    });
+    // const response2 = await fetch(`${chatAPI}?chat_id=${chat_id}`, {
+    //     method: 'DELETE'
+    // });
 
     window.location = '/pages/homeScreen.html';
 
