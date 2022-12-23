@@ -23,7 +23,7 @@ async function getFriendsList() {
                             />
                         </div>
                     <div class="col-lg-7 center-text">
-                        <h5 class="">${account.user.name}</h5>
+                        <h5 class="">${account.user.username}</h5>
                             <p class="">
                             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum doloremque similique necessitatibus voluptates non architecto possimus ullam ea vitae commodi?
                             </p>
@@ -40,7 +40,7 @@ async function getFriendsList() {
 
 async function getRequestList() {
     const requests = await getRequests();
-    const accounts = await searchUsers(friends);
+    const accounts = await searchUsers(requests);
     const pendinglist = document.getElementById('pending-list');
     const statusText3 = document.getElementById('status-text3');
     accounts.forEach(account => {
@@ -60,7 +60,7 @@ async function getRequestList() {
                         />
                     </div>
                 <div class="col-lg-7 center-text">
-                    <h5 class="">${account.user.name}</h5>
+                    <h5 class="">${account.user.username}</h5>
                 </div>
                 <div class="col-lg-2 center-text center">
                     <btn onclick="{acceptRequest(${account.request}), location.reload();}" class="btn btn-success center">Accept Request</btn>
@@ -81,7 +81,7 @@ async function getRequestList() {
                         />
                     </div>
                 <div class="col-lg-7 center-text">
-                    <h5 class="">${account.user.name}</h5>
+                    <h5 class="">${account.user.username}</h5>
                 </div>
                 <div class="col-lg-2 center-text center">
                     <p>Waiting for Approval</p>
@@ -130,7 +130,6 @@ async function getRequests() {
     const response = await fetch(friendsAPI + `/requests/${user_id}`);
     // TODO: Change existing variables to this format
     let data = await response.json();
-    console.log(data);
     const requests = data.data;
 
     if (requests.length > 0) {
@@ -138,9 +137,9 @@ async function getRequests() {
         requests.forEach(friend => {
             if (friend.from == user_id || friend.to == user_id) {
                 if (user_id == friend.from) {
-                    friendlist.push({ request: friend.id, id: friend.to, status: friend.status, requester: "me" });
+                    requestList.push({ request: friend.id, id: friend.to, status: friend.status, requester: "me" });
                 } else {
-                    friendlist.push({ request: friend.id, id: friend.from, status: friend.status, requester: "they" });
+                    requestList.push({ request: friend.id, id: friend.from, status: friend.status, requester: "they" });
                 }
             }
         });
@@ -153,10 +152,10 @@ async function getRequests() {
 async function searchUsers(friends) {
     const response = await fetch(userAPI);
     let data = await response.json();
-    let users = data.data;
+    console.log(data)
     const userlist = [];
     if (friends.length > 0) {
-        users.forEach(user => {
+        data.forEach(user => {
             friends.forEach(friend => {
                 if (user.id == friend.id) {
                     userlist.push({ user, request: friend.request, status: friend.status, requester: friend.requester });
