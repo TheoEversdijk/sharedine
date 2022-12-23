@@ -182,7 +182,7 @@ async function appointmentRegister() {
         }),
     });
 
-    console.log(getRegistrationEmail(user_email))
+    getRegistrationEmail(user_email)
     
 
     window.location = '/pages/homeScreen.html';

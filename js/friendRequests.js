@@ -21,7 +21,7 @@ async function findNewFriends() {
                             />
                         </div>
                     <div class="col-lg-7 center-text">
-                        <h5 class="">${user.name}</h5>
+                        <h5 class="">${user.username}</h5>
                             <p class="">
                             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum doloremque similique necessitatibus voluptates non architecto possimus ullam ea vitae commodi?
                             </p>
@@ -52,6 +52,7 @@ async function checkIfInFriendsList(users) {
 }
 
 async function sendFriendRequest(id) {
+    console.log(id);
     const userData = sessionStorage.getItem('userData');
     const userObject = JSON.parse(userData);
     const user_id = userObject.user.id;
