@@ -121,6 +121,10 @@ async function getAppointment() {
                 <div class="p-2">
                 <a class="btn btn-info" href="/pages/editAppointment.html">Edit</a>
               </div>`
+              listItem2.innerHTML =
+            `<div class="register-button">
+                <a href="#"><button type="button" class="btn btn-info" onclick="location.href='../pages/chat.html'">Chatroom</button></a>
+              </div>`
             }
 
               listItem3.innerHTML =
