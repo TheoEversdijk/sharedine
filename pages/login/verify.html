@@ -11,7 +11,7 @@
   <title>ShareDine</title>
 </head>
 
-<body>
+<body onload="{checkLoggedIn();}">
   <section class="background">
     <div class="mask d-flex align-items-center h-100 gradient-custom-3">
       <div class="container h-100">
@@ -19,44 +19,49 @@
           <div class="col-12 col-md-9 col-lg-7 col-xl-6">
             <div class="card" style="border-radius: 15px;">
               <div class="card-body p-5">
-                <h2 class="text-uppercase text-center mb-2">Create account</h2>
+                <h2 class="text-uppercase text-center mb-2">Personalize your account!</h2>
+                <p class="text-center fw-bold">Before you can start using our app, please take some time to think of a username
+                  and a cool profile picture!</p>
 
                 <div id="serverDiv"></div>
                 <form class="has-validation">
 
                   <div class="form-outline mb-4">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control form-control-lg" id="emailForm" required>
-                    <div class="valid-feedback">
-                      Looks good!
-                    </div>
-                    <div class="invalid-feedback">
-                      Please enter a valid email address.
+                    <label for="username" class="form-label">Username</label>
+                    <div class="input-group has-validation">
+                      <input type="username" class="form-control form-control-lg" id="userForm" minlength="6" required>
+                      <div class="valid-feedback">
+                        Looks good!
+                      </div>
+                      <div class="invalid-feedback">
+                        The username must be at least 6 characters long.
+                      </div>
                     </div>
                   </div>
 
                   <div class="form-outline mb-4">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control form-control-lg" id="emailForm" required>
-                    <div class="valid-feedback">
-                      Looks good!
-                    </div>
-                    <div class="invalid-feedback">
-                      Please enter a valid email address.
+                    <label for="avatar" class="form-label">Profile Picture</label>
+                    <div class="input-group has-validation">
+                      <input type="url" class="form-control form-control-lg" id="avatarForm"
+                        value="https://preview.redd.it/6wqw8boxon061.jpg?auto=webp&s=93011df4fb937d7ea102b91f90f0945c91c7eff6"
+                        required>
+                      <div class="valid-feedback">
+                        Looks good!
+                      </div>
+                      <div class="invalid-feedback">
+                        The avatar must be a link.
+                      </div>
                     </div>
                   </div>
 
                   <div class="container-row">
                     <div class="d-flex justify-content-center layer1">
                       <button id="fetchButton" type="submit"
-                        class="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
-                        onclick="register()">Register</button>
+                        class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" onclick="verify()">Let's
+                        go!</button>
                     </div>
                     <div class="layer2" id="loader"></div>
                   </div>
-
-                  <p class="text-center text-muted mt-2 mb-0">Already have an account? <a href="../../index.html"
-                      class="fw-bold text-body"><u>Login here</u></a></p>
 
                 </form>
 
