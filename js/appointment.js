@@ -158,7 +158,7 @@ async function appointmentRegister() {
     const id = sessionStorage.appointmentID;
 
     // Register memebers for appointments
-    const response = await fetch(appointmentAPI + `/${id}/register`, {
+    const register = await fetch(appointmentAPI + `/${id}/register`, {
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json'
@@ -182,10 +182,17 @@ async function appointmentRegister() {
         }),
     });
 
-    getRegistrationEmail(user_email)
+    // Get appointment
+    const response = await fetch(appointmentAPI + `/single/${id}`)
+    let appointment = await response.json();
+    console.log(appointment[0])
+
+    getRegistrationEmail(user_email, appointment[0])
     
 
-    window.location = '/pages/homeScreen.html';
+    StoreID(id)
+    window.location = '/pages/appointmentDetails.html';
+
     return response
 }
 
@@ -247,7 +254,8 @@ async function addAppointment() {
             }),
         }).then((response) => response.json('Chat Created'));
 
-        window.location = '/pages/homeScreen.html';
+        StoreID(appointment_id.id)
+        window.location = '/pages/appointmentDetails.html';
 
         return response
     }
@@ -298,7 +306,15 @@ async function editAppointment() {
         //     }),
         // });
 
-        window.location = '/pages/homeScreen.html';
+        // Get appointment
+        const response2 = await fetch(appointmentAPI + `/single/${id}`)
+        let appointment = await response.json();
+        console.log(appointment[0])
+
+        getEditEmail(user_email, appointment[0])
+    
+        StoreID(id)
+        window.location = '/pages/appointmentDetails.html';
 
         return response
     }
@@ -317,6 +333,13 @@ async function removeAppointment() {
         method: 'DELETE'
     });
 
+    // Get appointment
+    const response3 = await fetch(appointmentAPI + `/single/${id}`)
+     let appointment = await response.json();
+    console.log(appointment[0])
+
+    getCancelationEmail(user_email, appointment[0])
+    
     window.location = '/pages/homeScreen.html';
 
     return response

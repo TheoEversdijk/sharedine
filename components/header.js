@@ -49,9 +49,6 @@ class Header extends HTMLElement {
             <li class="nav-item">
               <a class="nav-link d-flex flex-column text-center" aria-current="page" href="/pages/chat.html"><span class="small">Chats</span></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link d-flex flex-column text-center" aria-current="page" href="#"><span class="small">Notifications</span></a>
-            </li>
             <li class="nav-item dropdown">
               <a
                 class="nav-link dropdown-toggle d-flex align-items-center"
