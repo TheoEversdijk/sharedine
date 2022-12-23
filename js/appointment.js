@@ -182,7 +182,7 @@ async function addAppointment() {
             method: 'POST'
         });
 
-        window.location = '/pages/homeScreen.html';
+        window.location = '/pages/appointmentDetails.html';
 
         return response
     }
@@ -282,3 +282,4 @@ function validation() {
         return true
     }
 }
+
