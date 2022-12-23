@@ -3,7 +3,6 @@ const friendsAPI = "http://127.0.0.1:3003/friends";
 async function getFriendsList() {
     const friends = await getFriends();
     const accounts = await searchUsers(friends);
-    console.log(accounts)
     const list = document.getElementById('friends-list');
     const statusText = document.getElementById('status-text');
     const statusText2 = document.getElementById('status-text2');
@@ -152,7 +151,6 @@ async function getRequests() {
 async function searchUsers(friends) {
     const response = await fetch(userAPI);
     let data = await response.json();
-    console.log(data)
     const userlist = [];
     if (friends.length > 0) {
         data.forEach(user => {

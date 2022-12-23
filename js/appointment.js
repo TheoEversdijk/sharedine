@@ -134,7 +134,7 @@ async function getAppointment() {
       <div class="col-lg-6 col-md-6 participants">
         <h1>Participants</h1>
         <ul>
-          <li>TBA</li>
+          <li>Owner: Noo</li>
         </ul>
       </div>
     </div>
