@@ -116,10 +116,21 @@ async function getAppointment() {
               </div>`
             }
 
+            if (data.owner_id !== user_id && data.members.includes(user_id)) {
+                listItem2.innerHTML =
+                `<div class="chat-button">
+                <a href="#"><button type="button" class="btn btn-info" onclick="location.href='../pages/chat.html'">Chatroom</button></a>
+              </div>`
+                }
+            
             if (data.owner_id == user_id) {
                 listItem4.innerHTML = `
                 <div class="p-2">
                 <a class="btn btn-info" href="/pages/editAppointment.html">Edit</a>
+              </div>`
+              listItem2.innerHTML =
+            `<div class="chat-button">
+                <a href="#"><button type="button" class="btn btn-info" onclick="location.href='../pages/chat.html'">Chatroom</button></a>
               </div>`
             }
 
