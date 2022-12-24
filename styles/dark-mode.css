@@ -2,3 +2,16 @@ body.dark {
     background:  #121212; 
     color: white; 
 }
+
+  
+.card-body {
+    /* background: #424242 */
+    background:  #222; 
+    color: white; 
+}
+
+.form-control {
+        /* background: #424242 */
+        background:  #222; 
+        color: white; 
+}
