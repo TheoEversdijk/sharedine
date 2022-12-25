@@ -1,10 +1,9 @@
 body.dark { 
-    background:  #121212; 
+    background:  #000; 
     color: white; 
 }
 
-  
-.card-body {
+.card {
     /* background: #424242 */
     background:  #222; 
     color: white; 
