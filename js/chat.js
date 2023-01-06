@@ -51,8 +51,9 @@ function loadChat(id) {
 async function getChat() {
   const queryParams = new URLSearchParams(window.location.search);
   const chat_id = queryParams.get('chat_id');
+  sessionStorage.setItem('chatID', chat_id);
   // console.log(chat_id)
-  const response = await fetch(`http://127.0.0.1:3004/chat/${chat_id}`);
+  const response = await fetch(`${chatAPI}/${chat_id}`);
 
   //store data in json
   let data = await response.json();
@@ -69,4 +70,23 @@ async function getChat() {
       body.append(listItem);
     });
   }
+}
+
+async function sendMessage() {
+  const userData = sessionStorage.getItem('userData');
+  const userObject = JSON.parse(userData);
+  const user_id = userObject.user.id;
+  const input = document.getElementById('send').value
+  const response = await fetch(`${chatAPI}/${sessionStorage.chatID}`, {
+    headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify({
+        'message': input,
+        'owner_id': user_id,
+    }),
+});
+
 }

@@ -15,9 +15,11 @@
 
 <div class="no-decoration py-2" id="messages"></div>
 
-  <div class="fixed-bottom container">
-    <input class="col-10 form-control">
-    <button class="col-1 btn btn-success">Send</button>
+  <div class="sticky-bottom container">
+    <div class="row">
+      <input id="send" class="col-10">
+      <button class="col-2 btn btn-success" onclick="sendMessage()">Send</button>
+    </div>
   </div>
 </div>
 
