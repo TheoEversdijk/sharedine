@@ -55,7 +55,6 @@ async function getAllAppointments() {
     const body = document.getElementById('items')
     if (response) {
         data.forEach(data => {
-            console.log(data);
             if (data.owner_id !== user_id && !data.members.includes(user_id)) {
                 let listItem = document.createElement('div');
                 listItem.innerHTML =
@@ -66,6 +65,7 @@ async function getAllAppointments() {
                                         <p class="card-text">Date: ${data.date}</p>
                                         <p class="card-text">Location: ${data.location}</p>
                                         <p class="card-text">Price per portion: €${data.price}</p>
+                                        <p class="card-text">Members: ${data.members.length}/${data.limit}</p>
                                         <p class="card-text"><small class="text-muted">Time: ${data.time}</small></p>
                                 </div>
                             </div>
@@ -77,64 +77,79 @@ async function getAllAppointments() {
 }
 
 async function getAppointment() {
-    const response = await fetch(appointmentAPI);
+    const response = await fetch(appointmentAPI + `/single/${sessionStorage.appointmentID}`);
+    let data = await response.json();
     //store data in json
     const userData = sessionStorage.getItem('userData');
     const userObject = JSON.parse(userData);
     const user_id = userObject.user.id;
-    let data = await response.json();
+    let users = await getAllUsers();
+    let members = [];
+    let owner = await searchUser(data.owner_id);
+    data.members.forEach(member => {
+        users.forEach(user => {
+            if (user.id == member) {
+                members.push(user);
+            }
+        })
+    })
     const appointmentName = document.getElementById('appointment-name')
     const body = document.getElementById('information')
     if (response) {
-        data.forEach(data => {
-            if (sessionStorage.appointmentID == data.id) {
-                let listItem = document.createElement('div');
-                let listItem2 = document.createElement('div');
-                let listItem3 = document.createElement('div');
-                let listItem4 = document.createElement('div');
-                let title = document.createElement('h1');
-                title.textContent = `${data.name}`;
+        let listItem = document.createElement('div');
+        let listItem2 = document.createElement('div');
+        let listItem3 = document.createElement('div');
+        let listItem4 = document.createElement('div');
+        let title = document.createElement('h1');
+        title.textContent = `${data.name}`;
 
-                listItem.innerHTML =
-                    `  
+        listItem.innerHTML =
+            `  
                 <div class="container">
     <div class="row">
         <div class="col-lg-6 col-md-6" id="image">
             <img src="../../resources/images/Foodsel.jpg" alt="f" class="details-image">
         </div>
         <div class="col-lg-6 col-md-6 details-info" id="info">
+            <p>Owner: ${owner.username}</p>
             <p>Location: ${data.location}</p>
             <p>Date: ${data.date}</p>
             <p>Time: ${data.time}</p>
             <p>Price: €${data.price}</p>
             </div>`
 
-            if (data.owner_id !== user_id && !data.members.includes(user_id)) {
+        if (data.owner_id !== user_id && !data.members.includes(user_id) && data.members.length < data.limit) {
             listItem2.innerHTML =
-            `<div class="register-button">
+                `<div class="register-button">
                 <a href="#"><button type="button" class="btn btn-info" onclick="appointmentRegister()">Register</button></a>
               </div>`
-            }
+        }
+        if (data.members.length >= data.limit) {
+            listItem2.innerHTML =
+                `<div class="register-button">
+                <p>Room is full.</p>
+              </div>`
+        }
 
-            if (data.owner_id !== user_id && data.members.includes(user_id)) {
-                listItem2.innerHTML =
+        if (data.owner_id !== user_id && data.members.includes(user_id)) {
+            listItem2.innerHTML =
                 `<div class="chat-button">
                 <a href="#"><button type="button" class="btn btn-info" onclick="location.href='../pages/chat.html'">Chatroom</button></a>
               </div>`
-                }
-            
-            if (data.owner_id == user_id) {
-                listItem4.innerHTML = `
+        }
+
+        if (data.owner_id == user_id) {
+            listItem4.innerHTML = `
                 <div class="p-2">
                 <a class="btn btn-info" href="/pages/editAppointment.html">Edit</a>
               </div>`
-              listItem2.innerHTML =
-            `<div class="chat-button">
+            listItem2.innerHTML =
+                `<div class="chat-button">
                 <a href="#"><button type="button" class="btn btn-info" onclick="location.href='../pages/chat.html'">Chatroom</button></a>
               </div>`
-            }
+        }
 
-              listItem3.innerHTML =
+        listItem3.innerHTML =
             `
     </div>
     <div class="row content-row-2">
@@ -144,19 +159,24 @@ async function getAppointment() {
       </div>
       <div class="col-lg-6 col-md-6 participants">
         <h1>Participants</h1>
-        <ul>
-          <li>Owner: Noo</li>
+        <ul id="member-list">
         </ul>
       </div>
     </div>
   </div>
                 `;
-                appointmentName.append(title);
-                body.append(listItem, listItem3);
-                document.getElementById('info').appendChild(listItem2);
-                document.getElementById('header-edit').appendChild(listItem4);
-            }
-        });
+        appointmentName.append(title);
+        body.append(listItem, listItem3);
+        document.getElementById('info').appendChild(listItem2);
+        document.getElementById('header-edit').appendChild(listItem4);
+        const list = document.getElementById('member-list')
+        members.forEach(member => {
+            console.log(member)
+            let user = document.createElement('li')
+            user.innerHTML = `${member.username}`;
+            console.log(user);
+            list.append(user);
+        })
     }
 }
 
@@ -179,24 +199,27 @@ async function appointmentRegister() {
             'member': user_id,
         }),
     });
-
+    console.log(response);
     // Get chat entry 
-    await fetch(chatAPI + "/register", {
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-        },
-        method: 'PUT',
-        body: JSON.stringify({
-            'appointment_id': id,
-            'member': user_id,
-        }),
-    });
+    if (response.status !== 304) {
+        await fetch(chatAPI + "/register", {
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'PUT',
+            body: JSON.stringify({
+                'appointment_id': id,
+                'member': user_id,
+            }),
+        });
+        getRegistrationEmail(user_email)
+        window.location = '/pages/homeScreen.html';
+    } else {
+        alert("Appointment is full");
+        window.location = '/pages/appointments.html';
+    }
 
-    getRegistrationEmail(user_email)
-    
-
-    window.location = '/pages/homeScreen.html';
     return response
 }
 

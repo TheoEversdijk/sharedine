@@ -11,3 +11,15 @@ async function searchUser(id) {
     let data = await response.json();
     return data;
 }
+
+async function getAllUsers() {
+    const response = await fetch(userAPI, {
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        method: 'GET',
+    });
+    let data = await response.json();
+    return data;
+}
