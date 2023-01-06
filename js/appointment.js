@@ -34,6 +34,7 @@ async function getPersonalAppointments() {
                                 <p class="card-text">Date: ${data.date}</p>
                                 <p class="card-text">Location: ${data.location}</p>
                                 <p class="card-text">Price per portion: €${data.price}</p>
+                                <p class="card-text">Members: ${data.members.length}/${data.limit}</p>
                                 <p class="card-text"><small class="text-muted">Time: ${data.time}</small></p>
                         </div>
                     </div>
@@ -240,7 +241,7 @@ async function addAppointment() {
         const meal = document.getElementById('validationMeal').value;
         const date = document.getElementById('validationDate').value;
         const time = document.getElementById('validationTime').value;
-        // const limit = document.getElementById('validationLimit').value;
+        const limit = document.getElementById('validationLimit').value;
         const location = document.getElementById('validationLocation').value;
         const price = document.getElementById('validationPrice').value;
         const info = document.getElementById('validationInfo').value;
@@ -258,7 +259,7 @@ async function addAppointment() {
                 'name': meal,
                 'date': date,
                 'time': time,
-                // 'limit': limit,
+                'limit': limit,
                 'location': location,
                 'price': price,
                 'info': info
@@ -296,7 +297,7 @@ async function editAppointment() {
         const meal = document.getElementById('validationMeal').value;
         const date = document.getElementById('validationDate').value;
         const time = document.getElementById('validationTime').value;
-        // const limit = document.getElementById('validationLimit').value;
+        const limit = document.getElementById('validationLimit').value;
         const location = document.getElementById('validationLocation').value;
         const price = document.getElementById('validationPrice').value;
         const info = document.getElementById('validationInfo').value;
