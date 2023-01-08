@@ -200,9 +200,9 @@ async function appointmentRegister() {
             'member': user_id,
         }),
     });
-    console.log(response);
+
     // Get chat entry 
-    if (response.status !== 304) {
+    if (register.status !== 304) {
         await fetch(chatAPI + "/register", {
             headers: {
                 Accept: 'application/json',
@@ -214,14 +214,13 @@ async function appointmentRegister() {
                 'member': user_id,
             }),
         });
-        // getRegistrationEmail(user_email)
-        window.location = '/pages/homeScreen.html';
-            // Get appointment
-        const response = await fetch(appointmentAPI + `/single/${id}`)
-        let appointment = await response.json();
-        console.log(appointment[0])
+    // Get appointment
+    const response = await fetch(appointmentAPI + `/single/${id}`)
+    let appointment = await response.json();
+    console.log(appointment)
 
-        getRegistrationEmail(user_email, appointment[0])
+    getRegistrationEmail(user_email, appointment)
+    window.location = '/pages/homeScreen.html';
     } else {
         alert("Appointment is full");
         window.location = '/pages/appointments.html';
