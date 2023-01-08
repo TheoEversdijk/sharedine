@@ -340,9 +340,9 @@ async function editAppointment() {
         // Get appointment
         const response2 = await fetch(appointmentAPI + `/single/${id}`)
         let appointment = await response.json();
-        console.log(appointment[0])
+        console.log(appointment)
 
-        getEditEmail(user_email, appointment[0])
+        getEditEmail(user_email, appointment)
     
         StoreID(id)
         window.location = '/pages/appointmentDetails.html';
@@ -367,9 +367,9 @@ async function removeAppointment() {
     // Get appointment
     const response3 = await fetch(appointmentAPI + `/single/${id}`)
      let appointment = await response.json();
-    console.log(appointment[0])
+    console.log(appointment)
 
-    getCancelationEmail(user_email, appointment[0])
+    getCancelationEmail(user_email, appointment)
     
     window.location = '/pages/homeScreen.html';
 
