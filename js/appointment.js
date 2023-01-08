@@ -246,9 +246,11 @@ async function addAppointment() {
         const time = document.getElementById('validationTime').value;
         const limit = document.getElementById('validationLimit').value;
         const location = document.getElementById('validationLocation').value;
-        const price = document.getElementById('validationPrice').value;
+        let price = document.getElementById('validationPrice').value;
         const info = document.getElementById('validationInfo').value;
-
+        if (price.includes(",")) {
+            price = price.replace(",", ".");
+        }
         event.preventDefault();
 
         const response = await fetch(appointmentAPI, {
@@ -303,8 +305,11 @@ async function editAppointment() {
         const time = document.getElementById('validationTime').value;
         const limit = document.getElementById('validationLimit').value;
         const location = document.getElementById('validationLocation').value;
-        const price = document.getElementById('validationPrice').value;
+        let price = document.getElementById('validationPrice').value;
         const info = document.getElementById('validationInfo').value;
+        if (price.includes(",")) {
+            price = price.replace(",", ".");
+        }
         event.preventDefault();
         const response = await fetch(appointmentAPI + `/${id}`, {
             headers: {
@@ -324,7 +329,7 @@ async function editAppointment() {
             }),
         });
 
-        // const response2 = await fetch(`${chatAPI}?chat_id=${chat_id}&meal=${meal}`, {
+        // await fetch(`${chatAPI}?chat_id=${chat_id}&meal=${meal}`, {
         //     headers: {
         //         Accept: 'application/json',
         //         'Content-Type': 'application/json'
@@ -339,7 +344,7 @@ async function editAppointment() {
 
         // Get appointment
         const response2 = await fetch(appointmentAPI + `/single/${id}`)
-        let appointment = await response.json();
+        let appointment = await response2.json();
         console.log(appointment)
 
         getEditEmail(user_email, appointment)
@@ -354,19 +359,19 @@ async function editAppointment() {
 async function removeAppointment() {
     let id = sessionStorage.appointmentID;
     event.preventDefault();
-    const response = await fetch(`http://127.0.0.1:3002/appointments/${id}`, {
+    const response = await fetch(`${appointmentAPI}/${id}`, {
         method: 'DELETE'
     });
 
-    // const chat_id = sessionStorage.appointmentID - 203; //TODO: DO THIS LIKE A SANE PERSON
+    // const chat_id = await fetch(`${chatAPI}/`)
 
-    // const response2 = await fetch(`${chatAPI}?chat_id=${chat_id}`, {
+    // await fetch(`${chatAPI}?chat_id=${chat_id}`, {
     //     method: 'DELETE'
     // });
 
     // Get appointment
     const response3 = await fetch(appointmentAPI + `/single/${id}`)
-     let appointment = await response.json();
+    let appointment = await response3.json();
     console.log(appointment)
 
     getCancelationEmail(user_email, appointment)
