@@ -12,22 +12,24 @@ async function getAllChats() {
   const body = document.getElementById('chats-list')
   if (response) {
     data.forEach(data => {
-      if (user_id == data.owner_id || data.members.includes(user_id)) {
-        let listItem = document.createElement('div');
-        listItem.innerHTML =
-          `<btn class="no-decoration chat-button" onclick="loadChat(${data.id})">
-                  <div class="container border py-3 row">
-                    <div class="col-lg-3 center">
-                      <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg" class="rounded-circle chat-img"
-                      alt="" loading="lazy" />
-                   </div>
-                    <div class="col-lg-9">
-                      <p>${data.name}</p>
-                      <small>Created on ${data.created_at}</small>
+      if (data.members !== null) {
+        if (user_id == data.owner_id || data.members.includes(user_id)) {
+          let listItem = document.createElement('div');
+          listItem.innerHTML =
+            `<btn class="no-decoration chat-button" onclick="loadChat(${data.id})">
+                    <div class="container border py-3 row">
+                      <div class="col-lg-3 center">
+                        <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg" class="rounded-circle chat-img"
+                        alt="" loading="lazy" />
+                     </div>
+                      <div class="col-lg-9">
+                        <p>${data.name}</p>
+                        <small>Created on ${data.created_at}</small>
+                      </div>
                     </div>
-                  </div>
-                </btn>`
-        body.append(listItem);
+                  </btn>`
+          body.append(listItem);
+        }
       }
     });
   }

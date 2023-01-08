@@ -214,7 +214,7 @@ async function appointmentRegister() {
                 'member': user_id,
             }),
         });
-        getRegistrationEmail(user_email)
+        // getRegistrationEmail(user_email)
         window.location = '/pages/homeScreen.html';
     } else {
         alert("Appointment is full");
