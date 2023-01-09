@@ -1,5 +1,6 @@
 const appointmentAPI = "http://127.0.0.1:3002/appointments";
 const chatAPI = "http://127.0.0.1:3004/chat";
+const notificationAPI = "http://127.0.0.1:3005";
 
 async function getPersonalAppointments() {
     const userData = sessionStorage.getItem('userData');
@@ -219,7 +220,10 @@ async function appointmentRegister() {
     let appointment = await response.json();
     console.log(appointment)
 
-    getRegistrationEmail(user_email, appointment)
+    const response2 = await fetch(`${notificationAPI}/register?email=${email}&appointment=${appointment.name}&date=${appointment.date}&location=${appointment.location}&time=${appointment.time}`, {
+        method: 'GET',
+      });
+
     window.location = '/pages/homeScreen.html';
     } else {
         alert("Appointment is full");
@@ -299,6 +303,7 @@ async function editAppointment() {
         const userData = sessionStorage.getItem('userData');
         const userObject = JSON.parse(userData);
         const owner_id = userObject.user.id;
+        const email = userObject.user.email;
         const id = sessionStorage.appointmentID;
         const meal = document.getElementById('validationMeal').value;
         const date = document.getElementById('validationDate').value;
@@ -343,11 +348,14 @@ async function editAppointment() {
         // });
 
         // Get appointment
-        // const response2 = await fetch(appointmentAPI + `/single/${id}`)
-        // let appointment = await response2.json();
-        // console.log(appointment)
+        const response2 = await fetch(appointmentAPI + `/single/${id}`)
+        let appointment = await response2.json();
+        console.log(appointment)
 
         //getEditEmail(user_email, appointment)
+        const response3 = await fetch(`${notificationAPI}/edit?email=${email}&appointment=${appointment.name}&date=${appointment.date}&location=${appointment.location}&time=${appointment.time}`, {
+            method: 'GET',
+        });
     
         StoreID(id)
         window.location = '/pages/appointmentDetails.html';
@@ -358,6 +366,9 @@ async function editAppointment() {
 
 async function removeAppointment() {
     let id = sessionStorage.appointmentID;
+    const userData = sessionStorage.getItem('userData');
+    const userObject = JSON.parse(userData);
+    const email = userObject.user.email;
     event.preventDefault();
     const response = await fetch(`${appointmentAPI}/${id}`, {
         method: 'DELETE'
@@ -370,13 +381,16 @@ async function removeAppointment() {
     // });
 
     // Get appointment
-    //const response3 = await fetch(appointmentAPI + `/single/${id}`)
-    //let appointment = await response3.json();
-    //console.log(appointment)
+    const response3 = await fetch(appointmentAPI + `/single/${id}`)
+    let appointment = await response3.json();
+    console.log(appointment)
 
     //getCancelationEmail(user_email, appointment)
-    
-    //window.location = '/pages/homeScreen.html';
+    const response4 = await fetch(`${notificationAPI}/remove?email=${email}&appointment=${appointment.name}`, {
+      method: 'GET',
+    });
+
+    window.location = '/pages/homeScreen.html';
 
     return response
 }
