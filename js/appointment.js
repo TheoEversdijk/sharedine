@@ -343,11 +343,11 @@ async function editAppointment() {
         // });
 
         // Get appointment
-        const response2 = await fetch(appointmentAPI + `/single/${id}`)
-        let appointment = await response2.json();
-        console.log(appointment)
+        // const response2 = await fetch(appointmentAPI + `/single/${id}`)
+        // let appointment = await response2.json();
+        // console.log(appointment)
 
-        getEditEmail(user_email, appointment)
+        //getEditEmail(user_email, appointment)
     
         StoreID(id)
         window.location = '/pages/appointmentDetails.html';
@@ -370,13 +370,13 @@ async function removeAppointment() {
     // });
 
     // Get appointment
-    const response3 = await fetch(appointmentAPI + `/single/${id}`)
-    let appointment = await response3.json();
-    console.log(appointment)
+    //const response3 = await fetch(appointmentAPI + `/single/${id}`)
+    //let appointment = await response3.json();
+    //console.log(appointment)
 
-    getCancelationEmail(user_email, appointment)
+    //getCancelationEmail(user_email, appointment)
     
-    window.location = '/pages/homeScreen.html';
+    //window.location = '/pages/homeScreen.html';
 
     return response
 }
@@ -407,4 +407,29 @@ function validation() {
     if (meal !== null && meal !== "" && date !== null && date !== "" && time !== null && time !== "" && location !== null && location !== "" && price !== null && price !== "" && info !== null && info !== "") {
         return true
     }
+}
+
+async function fetchOldAppointmentData() {
+    const meal = document.getElementById('validationMeal');
+    const date = document.getElementById('validationDate');
+    const time = document.getElementById('validationTime');
+    const limit = document.getElementById('validationLimit');
+    const location = document.getElementById('validationLocation');
+    const price = document.getElementById('validationPrice');
+    const info = document.getElementById('validationInfo');
+    const response = await fetch(appointmentAPI);
+    let data = await response.json();
+    if (response) {
+        data.forEach(data => {
+            if (sessionStorage.appointmentID == data.id) {
+                meal.value = data.name;
+                date.value = data.date;
+                time.value = data.time;
+                location.value = data.location;
+                price.value = data.price;
+                info.value = data.information;
+                limit.value = data.limit;
+            }
+        })
+    };
 }
