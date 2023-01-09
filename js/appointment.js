@@ -291,8 +291,7 @@ async function addAppointment() {
             }),
         }).then((response) => response.json('Chat Created'));
 
-        StoreID(appointment_id.id)
-        window.location = '/pages/appointmentDetails.html';
+        window.location = '/pages/homeScreen.html';
 
         return response
     }
@@ -422,7 +421,6 @@ function validation() {
         return true
     }
 }
-
 async function fetchOldAppointmentData() {
     const meal = document.getElementById('validationMeal');
     const date = document.getElementById('validationDate');

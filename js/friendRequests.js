@@ -140,3 +140,14 @@ async function unBlockUser(id) {
     });
     return response
 }
+
+
+function alertFriend(id) {
+    const result = confirm('Are you sure you want to delete this user as your friend?');
+    if (result) {
+        declineRequest(id);
+        
+    } else {
+        // nothing happens
+    }
+    }
