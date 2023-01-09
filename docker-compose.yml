@@ -46,3 +46,15 @@ services:
       bash -c
       "npm install
       && npm run start"
+
+  notifications:
+    image: node
+    volumes:
+      - '../sharedine-notifications:/app/sharedine-notifications'
+    working_dir: /app/sharedine-notifications/
+    ports:
+      - "3005:3005"
+    command: > 
+      bash -c
+      "npm install
+      && npm run start"

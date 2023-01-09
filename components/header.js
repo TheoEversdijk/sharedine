@@ -49,9 +49,6 @@ class Header extends HTMLElement {
             <li class="nav-item">
               <a class="nav-link d-flex flex-column text-center" aria-current="page" href="/pages/chat.html"><span class="small">Chats</span></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link d-flex flex-column text-center" aria-current="page" href="#"><span class="small">Notifications</span></a>
-            </li>
             <li class="nav-item dropdown">
               <a
                 class="nav-link dropdown-toggle d-flex align-items-center"
@@ -74,8 +71,7 @@ class Header extends HTMLElement {
                 <li><a class="dropdown-item" onclick="logout()">Logout</a></li>
               </ul>
             </li>
-            <dark-mode-toggle id="dark-mode-toggle"  appearance="toggle"     remember="Remember this"
-            > </dark-mode-toggle>
+            <dark-mode-toggle id="dark-mode-toggle"  appearance="toggle"> </dark-mode-toggle>
           </ul>
           <!-- Left links -->
         </div>

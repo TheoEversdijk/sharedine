@@ -41,7 +41,7 @@
     <div class="form-outline mb-4">
       <label for="date" class="form-label">Date</label>
       <div class="input-group has-validation">
-        <input type="date" class="form-control" id="validationDate" placeholder="PLease put the date here like this: 2022-12-12" required>
+        <input type="date" class="form-control" id="validationDate" required>
         <div class="valid-feedback">
           Looks good!
         </div>
@@ -52,7 +52,7 @@
       <div class="form-outline mb-4">
         <label for="time" class="form-label">Time</label>
         <div class="input-group has-validation">
-          <input type="time" class="form-control" id="validationTime" placeholder="Please put the time here like this: 16:00:00" required>
+          <input type="time" class="form-control" id="validationTime" required>
           <div class="valid-feedback">
             Looks good!
           </div>
@@ -76,12 +76,24 @@
       <div class="form-outline mb-4">
         <label for="price" class="form-label">Price</label>
         <div class="input-group has-validation">
-          <input type="price" class="form-control" id="validationPrice" placeholder="Only use . (dot) , (comma) is not supported" required>
+          <input type="price" class="form-control" id="validationPrice" required>
           <div class="valid-feedback">
             Looks good!
           </div>
           <div class="invalid-feedback">
             Please enter a price.
+          </div>
+        </div>
+      </div>
+      <div class="form-outline mb-4">
+        <label for="limit" class="form-label">Maximum number of members</label>
+        <div class="input-group has-validation">
+          <input type="limit" class="form-control" id="validationLimit" required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+          <div class="invalid-feedback">
+            Please enter the number of members.
           </div>
         </div>
       </div>

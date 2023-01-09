@@ -26,11 +26,10 @@
       <h1>Edit Appointment</h1>
     </div>
     <hr class="py-2">
-
     <div class="form-outline mb-4">
       <label for="meal" class="form-label">Meal</label>
       <div class="input-group has-validation">
-        <input type="text" class="form-control" id="validationMeal" placeholder="Pizza" required>
+        <input type="meal" class="form-control" id="validationMeal" required>
         <div class="valid-feedback">
           Looks good!
         </div>
@@ -42,7 +41,7 @@
     <div class="form-outline mb-4">
       <label for="date" class="form-label">Date</label>
       <div class="input-group has-validation">
-        <input type="date" class="form-control" id="validationDate" placeholder="2022-12-12" required>
+        <input type="date" class="form-control" id="validationDate" required>
         <div class="valid-feedback">
           Looks good!
         </div>
@@ -53,7 +52,7 @@
       <div class="form-outline mb-4">
         <label for="time" class="form-label">Time</label>
         <div class="input-group has-validation">
-          <input type="time" class="form-control" id="validationTime" placeholder="16:00:00" required>
+          <input type="time" class="form-control" id="validationTime" required>
           <div class="valid-feedback">
             Looks good!
           </div>
@@ -65,7 +64,7 @@
       <div class="form-outline mb-4">
         <label for="location" class="form-label">Location</label>
         <div class="input-group has-validation">
-          <input type="location" class="form-control" id="validationLocation" placeholder="Middelburg" required>
+          <input type="location" class="form-control" id="validationLocation" required>
           <div class="valid-feedback">
             Looks good!
           </div>
@@ -77,7 +76,7 @@
       <div class="form-outline mb-4">
         <label for="price" class="form-label">Price</label>
         <div class="input-group has-validation">
-          <input type="price" class="form-control" id="validationPrice" placeholder="3.00" required>
+          <input type="price" class="form-control" id="validationPrice" required>
           <div class="valid-feedback">
             Looks good!
           </div>
@@ -87,13 +86,24 @@
         </div>
       </div>
       <div class="form-outline mb-4">
+        <label for="limit" class="form-label">Maximum number of members</label>
+        <div class="input-group has-validation">
+          <input type="limit" class="form-control" id="validationLimit" required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+          <div class="invalid-feedback">
+            Please enter the number of members.
+          </div>
+        </div>
+      </div>
+      <div class="form-outline mb-4">
         <label for="info" class="form-label">Information</label>
 
         <span class="tt" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-html="true" title="Insert any additional information for the meal.
-            For example: is your meal vegan-friendly? Do you want members to bring something with them for the meal?">
+For example: is your meal vegan-friendly? Do you want members to bring something with them for the meal?">
           <i class="fa fa-question-circle-o"></i>
         </span>
-
 
         <div class="input-group has-validation">
           <input type="information" class="form-control" id="validationInfo" required>
@@ -109,8 +119,6 @@
 
     <button type="submit" class="btn btn-primary" onclick="editAppointment()">Update Appointment</button>
     <button type="submit" class="btn btn-danger" onclick="removeAppointment()">Delete Appointment</button>
-
-  </div>
 
   </div>
 
