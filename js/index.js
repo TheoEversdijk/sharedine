@@ -14,7 +14,7 @@ async function account() {
     const userObject = JSON.parse(userData);
     const user_id = userObject.user.id;
     const response = await searchUser(user_id);
-    document.getElementById('welcome').innerText = `Welcome ${response.username}`;
+    document.getElementById('welcome').innerText = `Welcome, ${response.username}`;
 }
 
 /**
