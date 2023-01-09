@@ -1,10 +1,10 @@
 class Header extends HTMLElement {
-    constructor() {
-        super();
-    }
+	constructor() {
+		super();
+	}
 
-    connectedCallback() {
-      this.innerHTML =  `
+	connectedCallback() {
+		this.innerHTML = `
       <head>
         <link rel="stylesheet" href="../styles/navbar.css">
       </head>
@@ -71,12 +71,11 @@ class Header extends HTMLElement {
                 />
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href="#">My profile</a></li>
-                <li><a class="dropdown-item" href="/pages/settings.html">Settings</a></li>
                 <li><a class="dropdown-item" onclick="logout()">Logout</a></li>
               </ul>
             </li>
-            <dark-mode-toggle id="dark-mode-toggle"  appearance="toggle"> </dark-mode-toggle>
+            <dark-mode-toggle id="dark-mode-toggle"  appearance="toggle"     remember="Remember this"
+            > </dark-mode-toggle>
           </ul>
           <!-- Left links -->
         </div>
@@ -84,8 +83,8 @@ class Header extends HTMLElement {
       </div>
       <!-- Container wrapper -->
     </nav>
-    `
-  };
+    `;
+	}
 }
 
 customElements.define('component-header', Header);

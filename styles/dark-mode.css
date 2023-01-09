@@ -1,4 +1,16 @@
 body.dark { 
-    background:  #121212; 
+    background:  #222; 
     color: white; 
+}
+
+.card {
+    /* background: #424242 */
+    background:  #212121; 
+    color: white; 
+}
+
+.form-control {
+        /* background: #424242 */
+        background:  #212121; 
+        color: white; 
 }
