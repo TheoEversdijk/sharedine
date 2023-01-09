@@ -12,10 +12,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShareDine - Home</title>
-
+    <script src="../js/auth.js"></script>
 </head>
 
-<body onload="{getPersonalAppointments(); checkLoggedIn(); account()}">
+<body onload="{getPersonalAppointments(); checkLoggedIn(); account(); checkVerified()}">
 
     <div class="container">
       <!-- Navbar -->
@@ -49,9 +49,6 @@
     <script src="../js/user.js"></script>
     <script src="../js/appointment.js"></script>
 </body>
-
-<script src="../js/auth.js"></script>
-<script src="../js/appointment.js"></script>
 
 <!-- support both dark and light mode -->
 <script src="../js/darkMode.js"></script>
