@@ -71,8 +71,6 @@ class Header extends HTMLElement {
                 />
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href="#">My profile</a></li>
-                <li><a class="dropdown-item" href="/pages/settings.html">Settings</a></li>
                 <li><a class="dropdown-item" onclick="logout()">Logout</a></li>
               </ul>
             </li>
