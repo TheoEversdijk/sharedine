@@ -71,7 +71,7 @@ class Header extends HTMLElement {
                 <li><a class="dropdown-item" onclick="logout()">Logout</a></li>
               </ul>
             </li>
-            <dark-mode-toggle id="dark-mode-toggle"  appearance="toggle"> </dark-mode-toggle>
+            <dark-mode-toggle id="dark-mode-toggle"  appearance="toggle" remember="Remember this"> </dark-mode-toggle>
           </ul>
           <!-- Left links -->
         </div>
