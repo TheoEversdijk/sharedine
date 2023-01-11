@@ -4,11 +4,11 @@ async function getFriendsList() {
     const friends = await getFriends();
     const accounts = await searchUsers(friends);
     const list = document.getElementById('friends-list');
-    const statusText = document.getElementById('status-text');
+    //const statusText = document.getElementById('status-text');
     const statusText2 = document.getElementById('status-text2');
     accounts.forEach(account => {
         if (accounts.length > 0) {
-            statusText.textContent = "";
+            //statusText.textContent = "";
             statusText2.textContent = "";
             const userCard = document.createElement('div');
             userCard.innerHTML =
@@ -16,7 +16,7 @@ async function getFriendsList() {
                     <div class="row">
                         <div class="col-lg-2">
                             <img
-                            src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg"
+                            src="${account.user.avatar}"
                             class="rounded-circle friend-image center"
                             alt="Profile picture"
                             />
@@ -26,9 +26,6 @@ async function getFriendsList() {
                             <p class="">
                             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum doloremque similique necessitatibus voluptates non architecto possimus ullam ea vitae commodi?
                             </p>
-                    </div>
-                    <div class="col-lg-2 center-text center">
-                        <a href="#" class="btn btn-info">Invite to an appointment</a>
                     </div>
                     </div>
                 </div>`;
@@ -53,7 +50,7 @@ async function getRequestList() {
                 <div class="row">
                     <div class="col-lg-2">
                         <img
-                        src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg"
+                        src="${account.user.avatar}"
                         class="rounded-circle friend-image center"
                         alt="Profile picture"
                         />
@@ -74,7 +71,7 @@ async function getRequestList() {
                 <div class="row">
                     <div class="col-lg-2">
                         <img
-                        src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg"
+                        src="${account.user.avatar}"
                         class="rounded-circle friend-image center"
                         alt="Profile picture"
                         />

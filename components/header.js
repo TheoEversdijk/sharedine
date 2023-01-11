@@ -1,10 +1,10 @@
 class Header extends HTMLElement {
-	constructor() {
-		super();
-	}
+  constructor() {
+    super();
+  }
 
-	connectedCallback() {
-		this.innerHTML = `
+  connectedCallback() {
+    this.innerHTML = `
       <head>
         <link rel="stylesheet" href="../styles/navbar.css">
       </head>
@@ -60,7 +60,8 @@ class Header extends HTMLElement {
                 aria-expanded="false"
               >
                 <img
-                  src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg"
+                  id="avatar"
+                  src="${avatar}"
                   class="rounded-circle"
                   height="30"
                   alt=""
@@ -71,7 +72,7 @@ class Header extends HTMLElement {
                 <li><a class="dropdown-item" onclick="logout()">Logout</a></li>
               </ul>
             </li>
-            <dark-mode-toggle id="dark-mode-toggle"  appearance="toggle" remember="Remember this"> </dark-mode-toggle>
+            <dark-mode-toggle id="dark-mode-toggle"  appearance="toggle" permanent="true"> </dark-mode-toggle>
           </ul>
           <!-- Left links -->
         </div>
@@ -80,7 +81,16 @@ class Header extends HTMLElement {
       <!-- Container wrapper -->
     </nav>
     `;
-	}
+  }
 }
+
+async function getAvatar() {
+  searchUser(JSON.parse(sessionStorage.userData).user.id).then(function (result) {
+    document.getElementById('avatar').src = result.avatar
+  })
+}
+getAvatar()
+
+const avatar = "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
 
 customElements.define('component-header', Header);

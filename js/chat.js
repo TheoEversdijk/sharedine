@@ -47,7 +47,7 @@ async function removeChat() {
 
 function loadChat(id) {
   const chatscreen = document.getElementById('chatroom-content');
-  chatscreen.innerHTML = `<iframe src="http://127.0.0.1:5500/pages/chatroom.html?chat_id=${id}" height="450px" class="col-lg-12 border" id="chatroom"></iframe>`
+  chatscreen.innerHTML = `<iframe src="http://127.0.0.1:5500/pages/chatroom.html?chat_id=${id}" height="650px" class="col-lg-12 border" id="chatroom"></iframe>`
 }
 
 async function getChat() {
@@ -59,6 +59,9 @@ async function getChat() {
 
   //store data in json
   let data = await response.json();
+
+  let owner = await searchUser(data.owner_id); // TODO: FIX SEARCHUSER NOT BEING DEFINED
+
   // console.log(data)
   const body = document.getElementById('messages')
   if (response) {
@@ -66,7 +69,7 @@ async function getChat() {
       let listItem = document.createElement('div');
       listItem.innerHTML =
         `<div class="card">
-              <p>Owner ID: ${data.owner_id}</p>
+              <p>Owner ID: ${owner.username}</p>
               <p>${data.message}</p>
               <small><p>Created at: ${data.created_at}</p></small>`
       body.append(listItem);
@@ -90,5 +93,5 @@ async function sendMessage() {
         'owner_id': user_id,
     }),
 });
-
+location.reload();
 }
