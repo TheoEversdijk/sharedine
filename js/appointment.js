@@ -333,18 +333,20 @@ async function editAppointment() {
             }),
         });
 
-        // await fetch(`${chatAPI}?chat_id=${chat_id}&meal=${meal}`, {
-        //     headers: {
-        //         Accept: 'application/json',
-        //         'Content-Type': 'application/json'
-        //     },
-        //     method: 'PUT',
-        //     body: JSON.stringify({
-        //         'owner_id': owner_id,
-        //         'appointment_id': appointment_id.id,
-        //         'meal': meal,
-        //     }),
-        // });
+        chat_id = id - 245;
+
+        await fetch(`${chatAPI}?chat_id=${chat_id}&meal=${meal}`, {
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'PUT',
+            body: JSON.stringify({
+                'owner_id': owner_id,
+                'chat_id': chat_id,
+                'meal': meal,
+            }),
+        });
 
         // Get appointment
         const response2 = await fetch(appointmentAPI + `/single/${id}`)
@@ -369,15 +371,12 @@ async function removeAppointment() {
     const userObject = JSON.parse(userData);
     const email = userObject.user.email;
     event.preventDefault();
-    const response = await fetch(`${appointmentAPI}/${id}`, {
+    
+    chat_id = id - 245;
+
+    await fetch(`${chatAPI}?chat_id=${chat_id}`, {
         method: 'DELETE'
     });
-
-    // const chat_id = await fetch(`${chatAPI}/`)
-
-    // await fetch(`${chatAPI}?chat_id=${chat_id}`, {
-    //     method: 'DELETE'
-    // });
 
     // Get appointment
     const response3 = await fetch(appointmentAPI + `/single/${id}`)
@@ -387,6 +386,10 @@ async function removeAppointment() {
     //getCancelationEmail(user_email, appointment)
     const response4 = await fetch(`${notificationAPI}/remove?email=${email}&appointment=${appointment.name}`, {
       method: 'GET',
+    });
+
+    const response = await fetch(`${appointmentAPI}/${id}`, {
+        method: 'DELETE'
     });
 
     window.location = '/pages/homeScreen.html';
