@@ -16,7 +16,7 @@ async function findNewFriends() {
                     <div class="row">
                         <div class="col-lg-2">
                             <img
-                            src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg"
+                            src="${user.avatar}"
                             class="rounded-circle friend-image center"
                             alt="Profile picture"
                             />
