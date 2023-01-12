@@ -60,7 +60,7 @@ async function getChat() {
   //store data in json
   let data = await response.json();
 
-  let owner = await searchUser(data.owner_id); // TODO: FIX SEARCHUSER NOT BEING DEFINED
+  let owner = await searchUser(JSON.parse(sessionStorage.userData).user.id);
 
   // console.log(data)
   const body = document.getElementById('messages')
@@ -69,9 +69,9 @@ async function getChat() {
       let listItem = document.createElement('div');
       listItem.innerHTML =
         `<div class="card">
-              <p>Owner ID: ${owner.username}</p>
+              <p><b>${owner.username}</b></p>
               <p>${data.message}</p>
-              <small><p>Created at: ${data.created_at}</p></small>`
+              <small><p>${data.created_at}</p></small>`
       body.append(listItem);
     });
   }
