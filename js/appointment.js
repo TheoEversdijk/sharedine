@@ -58,6 +58,7 @@ async function getAllAppointments() {
     if (response) {
         data.forEach(data => {
             if (data.owner_id !== user_id && !data.members.includes(user_id)) {
+                body.innerHTML = "";
                 let listItem = document.createElement('div');
                 listItem.innerHTML =
                     `<a href="/pages/appointmentDetails.html" onclick="StoreID(${data.id})" class="no-decoration">
