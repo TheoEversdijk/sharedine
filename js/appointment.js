@@ -187,7 +187,7 @@ async function appointmentRegister() {
     const userData = sessionStorage.getItem('userData');
     const userObject = JSON.parse(userData);
     const user_id = userObject.user.id;
-    const user_email = userObject.user.email;
+    const email = userObject.user.email;
     const id = sessionStorage.appointmentID;
 
     // Register memebers for appointments
