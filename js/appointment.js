@@ -334,6 +334,7 @@ async function editAppointment() {
             }),
         });
 
+        // Theo's code
         chat_id = id - 245;
 
         await fetch(`${chatAPI}?chat_id=${chat_id}&meal=${meal}`, {
